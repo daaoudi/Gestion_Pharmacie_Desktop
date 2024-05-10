@@ -1,0 +1,70 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.header{
+	-fx-background-color: #fff;
+	-fx-border-color: #000;
+	-fx-border-width: 0px 0.0px 1px 0px;
+}
+.side-bar{
+	-fx-background-color: linear-gradient(to bottom left , #419e58,#8d918e);
+	
+}
+.main-form{
+	
+	-fx-background-color: linear-gradient(to bottom left , #8feba6,#8d918e);
+}
+.form{
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+	-fx-border-radius: 10px;
+	-fx-background-color: #fff;
+	-fx-padding: 10px;
+}
+.textfield{
+	-fx-background-color: transparent;
+	-fx-border-color: linear-gradient(to bottom left , #8feba6,#8d918e);
+	-fx-border-width: 1px;
+	-fx-font-family: "Calibri";
+	-fx-font-size: 14px;
+}
+.textfield:focused{
+	-fx-background-color: #fff;
+	-fx-border-color: #000;
+	-fx-border-width: 1.7px;
+	-fx-border-radius: 3px;
+}
+.btn-signIn{
+	-fx-background-color: transparent;
+	-fx-border-color: linear-gradient(to bottom left , #8feba6,#8d918e);
+	-fx-border-width: 1px;
+	-fx-border-radius: 3px;
+}
+.btn-signIn:hover{
+	-fx-background-color:linear-gradient(to bottom left , #8feba6,#8d918e);
+	-fx-border-color: #000;
+	-fx-border-width: 1.7px;
+	-fx-cursor: hand;
+	
+}
+.btn-close{
+	-fx-background-color: transparent;
+	-fx-border-color: linear-gradient(to bottom left , #8feba6,#8d918e);
+	-fx-border-width: 1px;
+	-fx-border-radius: 3px;
+}
+.btn-close:hover{
+	-fx-background-color: #f05e41;
+	-fx-border-color: #000;
+	-fx-border-width: 1.5px;
+	-fx-cursor: hand;
+}
+.btn-minimize{
+	-fx-background-color: transparent;
+	-fx-border-color: linear-gradient(to bottom left , #8feba6,#8d918e);
+	-fx-border-width: 1px;
+	-fx-border-radius: 3px;
+}
+.btn-minimize:hover{
+	-fx-background-color: #7ff08a;
+	-fx-border-color: #000;
+	-fx-border-width: 1.5px;
+	-fx-cursor: hand;
+}
