@@ -56,47 +56,71 @@
                                           <Font name="Calibri Bold Italic" size="14.0" />
                                        </font>
                                     </Label>
-                                    <FontAwesomeIcon fill="#f8f5f5" glyphName="HOME" layoutX="21.0" layoutY="277.0" size="1.7em" />
-                                    <FontAwesomeIcon fill="#fcfcfc" glyphName="DATABASE" layoutX="21.0" layoutY="305.0" size="1.7em" />
-                                    <FontAwesomeIcon fill="#fffdfd" glyphName="ARCHIVE" layoutX="21.0" layoutY="338.0" size="1.7em" />
-                                    <FontAwesomeIcon fill="#fffefe" glyphName="MEDKIT" layoutX="21.0" layoutY="368.0" size="1.7em" />
-                                    <FontAwesomeIcon fill="WHITE" glyphName="CHILD" layoutX="21.0" layoutY="395.0" size="1.7em" />
-                                    <FontAwesomeIcon fill="WHITE" glyphName="MONEY" layoutX="21.0" layoutY="422.0" size="1.7em" />
-                                    <FontAwesomeIcon fill="WHITE" glyphName="MONEY" layoutX="21.0" layoutY="451.0" size="1.7em" />
-                                    <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="21.0" layoutY="480.0" size="1.7em" />
-                                    <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="21.0" layoutY="509.0" size="1.7em" />
-                                    <Button fx:id="home_btn" layoutX="55.0" layoutY="259.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Home">
+                                    <Button fx:id="home_btn" layoutX="12.0" layoutY="259.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Home">
                                        <font>
                                           <Font name="Calisto MT Italic" size="14.0" />
-                                       </font></Button>
-                                    <Button fx:id="stock_btn" layoutX="55.0" layoutY="288.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Stock Medicament">
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIcon fill="#f8f5f5" glyphName="HOME" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="stock_btn" layoutX="10.0" layoutY="288.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Stock Medicament">
                                        <font>
                                           <Font name="Calisto MT Italic" size="14.0" />
-                                       </font></Button>
-                                    <Button fx:id="gestion_med_pat_btn" layoutX="55.0" layoutY="321.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Gestion_Med_Patient">
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIcon fill="#fcfcfc" glyphName="DATABASE" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="gestion_med_pat_btn" layoutX="10.0" layoutY="321.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Gestion_Med_Patient">
                                        <font>
                                           <Font name="Calisto MT Italic" size="14.0" />
-                                       </font></Button>
-                                    <Button fx:id="medicament_btn" layoutX="57.0" layoutY="351.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Medicament">
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIcon fill="#fffdfd" glyphName="ARCHIVE" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="medicament_btn" layoutX="11.0" layoutY="351.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Medicament">
                                        <font>
                                           <Font name="Calisto MT Italic" size="14.0" />
-                                       </font></Button>
-                                    <Button fx:id="fournisseur_btn" layoutX="57.0" layoutY="378.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Fournisseur" />
-                                    <Button fx:id="gestion_pat_fact_btn" layoutX="58.0" layoutY="405.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Gestion_Pat_Facture" />
-                                    <Button fx:id="facture_btn" layoutX="58.0" layoutY="434.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Facture" />
-                                    <Button fx:id="patient_btn" layoutX="58.0" layoutY="492.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Patient" />
-                                    <Button fx:id="docteur_btn" layoutX="58.0" layoutY="463.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Docteur" />
-                                    <Button fx:id="logout_btn" layoutX="12.0" layoutY="581.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="44.0" styleClass="btn" stylesheets="@adminDashboard.css" />
-                                    <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" layoutX="29.0" layoutY="600.0" size="1.4em" />
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIcon fill="#fffefe" glyphName="MEDKIT" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="fournisseur_btn" layoutX="12.0" layoutY="378.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Fournisseur">
+                                       <graphic>
+                                          <FontAwesomeIcon fill="WHITE" glyphName="CHILD" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="gestion_pat_fact_btn" layoutX="12.0" layoutY="405.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Gestion_Pat_Facture">
+                                       <graphic>
+                                          <FontAwesomeIcon fill="WHITE" glyphName="MONEY" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="facture_btn" layoutX="12.0" layoutY="434.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Facture">
+                                       <graphic>
+                                          <FontAwesomeIcon fill="WHITE" glyphName="MONEY" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="patient_btn" layoutX="13.0" layoutY="492.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Patient">
+                                       <graphic>
+                                          <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="docteur_btn" layoutX="13.0" layoutY="463.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Docteur">
+                                       <graphic>
+                                          <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="logout_btn" layoutX="12.0" layoutY="581.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="44.0" styleClass="btn" stylesheets="@adminDashboard.css">
+                                       <graphic>
+                                          <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" size="1.4em" />
+                                       </graphic></Button>
                                     <Label layoutX="67.0" layoutY="586.0" text="Logout">
                                        <font>
                                           <Font name="Calibri Bold Italic" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="users_btn" layoutX="58.0" layoutY="520.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Utilisateurs" />
-                                    <FontAwesomeIcon fill="#fffdfd" glyphName="USERS" layoutX="21.0" layoutY="536.0" size="1.7em" />
-                                    <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="21.0" layoutY="564.0" size="1.7em" />
-                                    <Button fx:id="profile_btn" layoutX="58.0" layoutY="547.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Profile" />
+                                    <Button fx:id="users_btn" layoutX="13.0" layoutY="520.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Utilisateurs">
+                                       <graphic>
+                                          <FontAwesomeIcon fill="#fffdfd" glyphName="USERS" size="1.7em" />
+                                       </graphic></Button>
+                                    <Button fx:id="profile_btn" layoutX="13.0" layoutY="547.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Profile">
+                                       <graphic>
+                                          <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.7em" />
+                                       </graphic></Button>
                                  </children>
                               </AnchorPane>
                            </children>

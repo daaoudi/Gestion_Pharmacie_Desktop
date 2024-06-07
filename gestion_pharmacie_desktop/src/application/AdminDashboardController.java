@@ -501,8 +501,9 @@ public class AdminDashboardController implements Initializable {
 	    @FXML
 	    private TableView<?> users_table;
 	    
+	    @FXML
 	    public void SwitchForm(ActionEvent event) {
-	    	if(event.getSource()==home) {
+	    	if(event.getSource()==home_btn) {
 	    		home.setVisible(true);
 	    		stock_medicament_form.setVisible(false);
 	    		gestion_med_pat_form.setVisible(false);
@@ -514,9 +515,21 @@ public class AdminDashboardController implements Initializable {
 	    		patient_form.setVisible(false);
 	    		users_form.setVisible(false);
 	    		profile_form.setVisible(false);
-	    		home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84);");
+	    		home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c);");
+users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		
-	    	}else if(event.getSource()==stock_medicament_form) {
+	    	
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    	}else if(event.getSource()==stock_btn) {
 	    		stock_medicament_form.setVisible(true);
 	    		gestion_med_pat_form.setVisible(false);
 	    		med_form.setVisible(false);
@@ -528,9 +541,21 @@ public class AdminDashboardController implements Initializable {
 	    		users_form.setVisible(false);
 	    		profile_form.setVisible(false);
 	    		home.setVisible(false);
-	    		stock_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
+	    		stock_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c);");
+users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		
-	    	}else if(event.getSource()==gestion_med_pat_form) {
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    	}else if(event.getSource()==gestion_med_pat_btn) {
 	    		gestion_med_pat_form.setVisible(true);
 	    		med_form.setVisible(false);
 	    		fournisseur_form.setVisible(false);
@@ -542,8 +567,20 @@ public class AdminDashboardController implements Initializable {
 	    		profile_form.setVisible(false);
 	    		home.setVisible(false);
 	    		stock_medicament_form.setVisible(false);
-	    		gestion_med_pat_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
-	    	}else if(event.getSource()==med_form) {
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c); ");
+users_btn.setStyle(" -fx-background-color:TRANSPARENT");
+	    		
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    	}else if(event.getSource()==medicament_btn) {
 	    		med_form.setVisible(true);
 	    		fournisseur_form.setVisible(false);
 	    		gestion_pat_facture_form.setVisible(false);
@@ -555,8 +592,20 @@ public class AdminDashboardController implements Initializable {
 	    		home.setVisible(false);
 	    		stock_medicament_form.setVisible(false);
 	    		gestion_med_pat_form.setVisible(false);
-	    		medicament_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
-	    	}else if(event.getSource()==fournisseur_form) {
+	    		medicament_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c); ");
+users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    	}else if(event.getSource()==fournisseur_btn) {
 	    		fournisseur_form.setVisible(true);
 	    		gestion_pat_facture_form.setVisible(false);
 	    		facture_form.setVisible(false);
@@ -568,8 +617,20 @@ public class AdminDashboardController implements Initializable {
 	    		stock_medicament_form.setVisible(false);
 	    		gestion_med_pat_form.setVisible(false);
 	    		med_form.setVisible(false);
-	    		fournisseur_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
-	    	}else if(event.getSource()==gestion_pat_facture_form) {
+	    		fournisseur_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c);");
+users_btn.setStyle(" -fx-background-color:TRANSPARENT");
+	    		
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    	}else if(event.getSource()==gestion_pat_fact_btn) {
 	    		gestion_pat_facture_form.setVisible(true);
 	    		facture_form.setVisible(false);
 	    		docteur_form.setVisible(false);
@@ -581,8 +642,20 @@ public class AdminDashboardController implements Initializable {
 	    		gestion_med_pat_form.setVisible(false);
 	    		med_form.setVisible(false);
 	    		fournisseur_form.setVisible(false);
-	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
-	    	}else if(event.getSource()==facture_form) {
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c); ");
+users_btn.setStyle(" -fx-background-color:TRANSPARENT");
+	    		
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    	}else if(event.getSource()==facture_btn) {
 	    		facture_form.setVisible(true);
 	    		docteur_form.setVisible(false);
 	    		patient_form.setVisible(false);
@@ -594,8 +667,20 @@ public class AdminDashboardController implements Initializable {
 	    		med_form.setVisible(false);
 	    		fournisseur_form.setVisible(false);
 	    		gestion_pat_facture_form.setVisible(false);
-	    		facture_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
-	    	}else if(event.getSource()==docteur_form) {
+	    		facture_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c);");
+users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    	
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    	}else if(event.getSource()==docteur_btn) {
 	    		docteur_form.setVisible(true);
 	    		patient_form.setVisible(false);
 	    		users_form.setVisible(false);
@@ -607,8 +692,20 @@ public class AdminDashboardController implements Initializable {
 	    		fournisseur_form.setVisible(false);
 	    		gestion_pat_facture_form.setVisible(false);
 	    		facture_form.setVisible(false);
-	    		docteur_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
-	    	}else if(event.getSource()==patient_form) {
+	    		docteur_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c); ");
+users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    	}else if(event.getSource()==patient_btn) {
 	    		patient_form.setVisible(true);
 	    		users_form.setVisible(false);
 	    		profile_form.setVisible(false);
@@ -620,8 +717,20 @@ public class AdminDashboardController implements Initializable {
 	    		gestion_pat_facture_form.setVisible(false);
 	    		facture_form.setVisible(false);
 	    		docteur_form.setVisible(false);
-	    		patient_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
-	    	}else if (event.getSource()==users_form) {
+	    		patient_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c); ");
+	    		users_btn.setStyle(" -fx-background-color:TRANSPARENT");
+	    		
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    	}else if (event.getSource()==users_btn) {
 	    		users_form.setVisible(true);
 	    		profile_form.setVisible(false);
 	    		home.setVisible(false);
@@ -633,8 +742,19 @@ public class AdminDashboardController implements Initializable {
 	    		facture_form.setVisible(false);
 	    		docteur_form.setVisible(false);
 	    		patient_form.setVisible(false);
-	    		users_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
-	    	}else if(event.getSource()==profile_form) {
+	    		users_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c); ");
+	    		
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    	}else if(event.getSource()==profile_btn) {
 	    		profile_form.setVisible(true);
 	    		home.setVisible(false);
 	    		stock_medicament_form.setVisible(false);
@@ -646,7 +766,17 @@ public class AdminDashboardController implements Initializable {
 	    		docteur_form.setVisible(false);
 	    		patient_form.setVisible(false);
 	    		users_form.setVisible(true);
-	    		profile_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #3a4368,#70db84); ");
+	    		profile_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c); ");
+	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    	}
 	    }
 	
