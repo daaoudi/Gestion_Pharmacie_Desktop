@@ -28,7 +28,7 @@
                   <FontAwesomeIcon glyphName="MINUS" layoutX="692.0" layoutY="20.0" size="1.2em" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="45.0" prefHeight="421.0" prefWidth="760.0">
+            <AnchorPane fx:id="main_formm" layoutY="45.0" prefHeight="421.0" prefWidth="760.0">
                <children>
                   <AnchorPane prefHeight="421.0" prefWidth="290.0" styleClass="side-bar" stylesheets="@application.css">
                      <children>
@@ -48,7 +48,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Button fx:id="login_btn" layoutX="207.0" layoutY="361.0" mnemonicParsing="false" styleClass="btn-signIn" stylesheets="@application.css" text="LogIn" textFill="#2f2e2e">
+                        <Button fx:id="login_btn" layoutX="207.0" layoutY="361.0" mnemonicParsing="false" onAction="#loginButtonAction" styleClass="btn-signIn" stylesheets="@application.css" text="LogIn" textFill="#2f2e2e">
                            <font>
                               <Font name="Calibri Bold" size="16.0" />
                            </font>

@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="F:/Downloads/Compressed/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar"/>
 	<classpathentry kind="lib" path="C:/Users/zakfa/Downloads/ojdbc11.jar"/>
 	<classpathentry kind="lib" path="C:/Users/zakfa/Downloads/fontawesomefx-8.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/zakfa/Downloads/fontawesomefx-8.9.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

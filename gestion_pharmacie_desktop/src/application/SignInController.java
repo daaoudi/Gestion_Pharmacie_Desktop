@@ -1,5 +1,6 @@
 package application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 
@@ -11,7 +12,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -48,7 +53,8 @@ public class SignInController implements Initializable {
 	@FXML
     private Button minimize;
 	
-	
+	@FXML
+	private AnchorPane main_formm;
 	
 	
    public void minimizeWindow(ActionEvent event) {
@@ -62,10 +68,22 @@ public class SignInController implements Initializable {
 		 return !nom.isEmpty() && !prenom.isEmpty() && !email.isEmpty() && !password.isEmpty() && !telephone.isEmpty() && userType != null;
 		 }
 
-	    private void redirectToDashboard(String userType) {
-	        // You can redirect to different dashboards based on userType
-	        System.out.println("Redirecting to " + userType + " dashboard");
-	    }
+	 private void redirectToDashboard(String userType, ActionEvent event) {
+		    // You can redirect to different dashboards based on userType
+		    if ("admin".equals(userType)) {
+		        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminDashboard.fxml"));
+		        try {
+		            Parent root = loader.load();
+		            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		            stage.setScene(new Scene(root));
+		            stage.show();
+		        } catch (IOException e) {
+		            e.printStackTrace();
+		        }
+		    } else {
+		        System.out.println("Redirecting to " + userType + " dashboard");
+		    }
+		}
 	
 	    private void insertUserIntoDatabase(String nom , String prenom , String email , String password , String telephone , String userType) {
 	    	String query = "INSERT INTO users (nom, prenom, email, password, telephone,user_type) VALUES (?, ?, ?, ?, ?,?)";
@@ -106,7 +124,7 @@ public class SignInController implements Initializable {
 
 	        if (isValidUser(nomField, prenomField, emailField, passwordField, telephoneField, userType)) {
 	            insertUserIntoDatabase(nomField, prenomField, emailField, passwordField, telephoneField, userType);
-	            redirectToDashboard(userType);
+	            redirectToDashboard(userType,event);
 	        } else {
 	            // Show error message if validation fails
 	            Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -130,6 +148,17 @@ public class SignInController implements Initializable {
 	   }
 		public void close() {
 			System.exit(0);
+		}
+		
+		public void loginButtonAction(ActionEvent event) {
+		    try {
+		        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
+		        Parent loginPage = loader.load();
+		        main_formm.getChildren().clear();
+		        main_formm.getChildren().add(loginPage);
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
 		}
 		
 		

@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.AdminDashboardController">
+   <children>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <AnchorPane prefHeight="680.0" prefWidth="1350.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="680.0" prefWidth="1350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="50.0" prefWidth="1350.0" styleClass="nav-head" stylesheets="@adminDashboard.css">
+                           <children>
+                              <FontAwesomeIcon glyphName="USER" layoutX="26.0" layoutY="29.0" />
+                              <Label layoutX="51.0" layoutY="17.0" text="Gestion Pharmacie">
+                                 <font>
+                                    <Font name="Calibri Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="close_btn" layoutX="1299.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
+                              <FontAwesomeIcon glyphName="CLOSE" layoutX="1319.0" layoutY="17.0" size="1.2em" />
+                              <Button fx:id="minimize_btn" layoutX="1247.0" layoutY="1.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" />
+                              <FontAwesomeIcon glyphName="MINUS" layoutX="1267.0" layoutY="18.0" size="1.2em" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutY="50.0" prefHeight="630.0" prefWidth="217.0">
+                           <children>
+                              <AnchorPane prefHeight="630.0" prefWidth="324.0" styleClass="nav-form" stylesheets="@adminDashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="53.0" layoutY="136.0" size="10em" />
+                                    <Label layoutX="67.0" layoutY="164.0" text="Bienvenue">
+                                       <font>
+                                          <Font name="Calibri Bold" size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="username" layoutX="81.0" layoutY="205.0" text="Admin">
+                                       <font>
+                                          <Font name="Calibri Bold Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <FontAwesomeIcon fill="#f8f5f5" glyphName="HOME" layoutX="21.0" layoutY="277.0" size="1.7em" />
+                                    <FontAwesomeIcon fill="#fcfcfc" glyphName="DATABASE" layoutX="21.0" layoutY="305.0" size="1.7em" />
+                                    <FontAwesomeIcon fill="#fffdfd" glyphName="ARCHIVE" layoutX="21.0" layoutY="338.0" size="1.7em" />
+                                    <FontAwesomeIcon fill="#fffefe" glyphName="MEDKIT" layoutX="21.0" layoutY="368.0" size="1.7em" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="CHILD" layoutX="21.0" layoutY="395.0" size="1.7em" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="MONEY" layoutX="21.0" layoutY="422.0" size="1.7em" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="MONEY" layoutX="21.0" layoutY="451.0" size="1.7em" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="21.0" layoutY="480.0" size="1.7em" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="21.0" layoutY="509.0" size="1.7em" />
+                                    <Button fx:id="home_btn" layoutX="55.0" layoutY="259.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Home">
+                                       <font>
+                                          <Font name="Calisto MT Italic" size="14.0" />
+                                       </font></Button>
+                                    <Button fx:id="stock_btn" layoutX="55.0" layoutY="288.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Stock Medicament">
+                                       <font>
+                                          <Font name="Calisto MT Italic" size="14.0" />
+                                       </font></Button>
+                                    <Button fx:id="gestion_med_pat_btn" layoutX="55.0" layoutY="321.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Gestion_Med_Patient">
+                                       <font>
+                                          <Font name="Calisto MT Italic" size="14.0" />
+                                       </font></Button>
+                                    <Button fx:id="medicament_btn" layoutX="57.0" layoutY="351.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Medicament">
+                                       <font>
+                                          <Font name="Calisto MT Italic" size="14.0" />
+                                       </font></Button>
+                                    <Button fx:id="fournisseur_btn" layoutX="57.0" layoutY="378.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Fournisseur" />
+                                    <Button fx:id="gestion_pat_fact_btn" layoutX="58.0" layoutY="405.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Gestion_Pat_Facture" />
+                                    <Button fx:id="facture_btn" layoutX="58.0" layoutY="434.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Facture" />
+                                    <Button fx:id="patient_btn" layoutX="58.0" layoutY="492.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Patient" />
+                                    <Button fx:id="docteur_btn" layoutX="58.0" layoutY="463.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Docteur" />
+                                    <Button fx:id="logout_btn" layoutX="12.0" layoutY="581.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="44.0" styleClass="btn" stylesheets="@adminDashboard.css" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="SIGN_OUT" layoutX="29.0" layoutY="600.0" size="1.4em" />
+                                    <Label layoutX="67.0" layoutY="586.0" text="Logout">
+                                       <font>
+                                          <Font name="Calibri Bold Italic" size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <Button fx:id="users_btn" layoutX="58.0" layoutY="520.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Utilisateurs" />
+                                    <FontAwesomeIcon fill="#fffdfd" glyphName="USERS" layoutX="21.0" layoutY="536.0" size="1.7em" />
+                                    <FontAwesomeIcon fill="WHITE" glyphName="USER" layoutX="21.0" layoutY="564.0" size="1.7em" />
+                                    <Button fx:id="profile_btn" layoutX="58.0" layoutY="547.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="140.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Profile" />
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="217.0" layoutY="50.0" prefHeight="630.0" prefWidth="1134.0">
+                           <children>
+                              <AnchorPane fx:id="home" prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane layoutX="8.0" layoutY="5.0" prefHeight="618.0" prefWidth="1119.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                       <children>
+                                          <AnchorPane layoutX="11.0" layoutY="8.0" prefHeight="254.0" prefWidth="1099.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <AnchorPane layoutX="5.0" layoutY="12.0" prefHeight="228.0" prefWidth="268.0" styleClass="mini-board" stylesheets="@adminDashboard.css">
+                                                   <children>
+                                                      <Label layoutX="52.0" layoutY="180.0" text="Stock Medicament" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="stock_qte" alignment="CENTER" layoutX="165.0" layoutY="14.0" prefHeight="35.0" prefWidth="70.0" text="0" textAlignment="CENTER" textFill="#fcfcfc">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="30.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <FontAwesomeIcon fill="#f8f5f5" glyphName="DATABASE" layoutX="29.0" layoutY="138.0" size="7em" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="282.0" layoutY="12.0" prefHeight="228.0" prefWidth="268.0" styleClass="mini-board" stylesheets="@adminDashboard.css">
+                                                   <children>
+                                                      <Label layoutX="63.0" layoutY="175.0" text="Patient" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="patient_nbr" alignment="CENTER" layoutX="184.0" layoutY="14.0" prefHeight="35.0" prefWidth="70.0" text="0" textAlignment="CENTER" textFill="#fcfcfc">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="30.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <FontAwesomeIcon fill="#f8f5f5" glyphName="USER" layoutX="30.0" layoutY="144.0" size="7em" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="556.0" layoutY="12.0" prefHeight="228.0" prefWidth="268.0" styleClass="mini-board" stylesheets="@adminDashboard.css">
+                                                   <children>
+                                                      <Label layoutX="61.0" layoutY="172.0" text="Docteur" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="docteur_nbr" alignment="CENTER" layoutX="184.0" layoutY="21.0" prefHeight="35.0" prefWidth="70.0" text="0" textAlignment="CENTER" textFill="#fcfcfc">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="30.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <FontAwesomeIcon fill="#f8f5f5" glyphName="USER" layoutX="33.0" layoutY="141.0" size="7em" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="831.0" layoutY="12.0" prefHeight="228.0" prefWidth="263.0" styleClass="mini-board" stylesheets="@adminDashboard.css">
+                                                   <children>
+                                                      <Label layoutX="61.0" layoutY="172.0" text="Fournisseur" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="20.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label fx:id="fournisseur_nbr" alignment="CENTER" layoutX="184.0" layoutY="21.0" prefHeight="35.0" prefWidth="70.0" text="0" textAlignment="CENTER" textFill="#fcfcfc">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="30.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <FontAwesomeIcon fill="#f8f5f5" glyphName="USER" layoutX="33.0" layoutY="141.0" size="7em" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                          <BarChart fx:id="patient_data_chart" layoutX="127.0" layoutY="313.0" prefHeight="297.0" prefWidth="856.0" title="Patient Donneé de Transaction ">
+                                            <xAxis>
+                                              <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis side="LEFT" />
+                                            </yAxis>
+                                          </BarChart>
+                                       </children></AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="stock_medicament_form" prefHeight="631.0" prefWidth="1134.0" visible="false">
+                                 <children>
+                                    <AnchorPane prefHeight="631.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="12.0" layoutY="8.0" prefHeight="610.0" prefWidth="376.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <Label layoutX="100.0" layoutY="50.0" text="Formulaire Stock Medicament">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="25.0" layoutY="128.0" prefHeight="17.0" prefWidth="54.0" text="Stock ID :" />
+                                                <TextField fx:id="stock_id_textfield" layoutX="84.0" layoutY="117.0" prefHeight="39.0" prefWidth="219.0" promptText="Stock ID" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Button fx:id="add_stock_btn" layoutX="146.0" layoutY="220.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="93.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fffefe">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font></Button>
+                                                <Button fx:id="update_stock_btn" layoutX="97.0" layoutY="292.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fcfcfc">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font></Button>
+                                                <Button fx:id="delete_stock_btn" layoutX="204.0" layoutY="292.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#fffdfd">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font></Button>
+                                                <Label layoutX="25.0" layoutY="175.0" prefHeight="17.0" prefWidth="58.0" text="Qte :" />
+                                                <TextField fx:id="qte_textfield" layoutX="84.0" layoutY="164.0" prefHeight="39.0" prefWidth="219.0" promptText="Quantité" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="399.0" layoutY="8.0" prefHeight="610.0" prefWidth="726.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <TableView fx:id="stock_table" layoutX="14.0" layoutY="31.0" prefHeight="568.0" prefWidth="697.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="stock_id_col" prefWidth="252.0" text="Stock ID" />
+                                                    <TableColumn fx:id="qte_stock_col" minWidth="0.0" prefWidth="444.0" text="Quantité" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="gestion_med_pat_form" prefHeight="631.0" prefWidth="1133.0" visible="false">
+                                 <children>
+                                    <AnchorPane prefHeight="631.0" prefWidth="1133.0" styleClass="board" stylesheets="@adminDashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="9.0" layoutY="9.0" prefHeight="614.0" prefWidth="1114.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <AnchorPane layoutX="16.0" layoutY="14.0" prefHeight="588.0" prefWidth="391.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                                   <children>
+                                                      <Label layoutX="64.0" layoutY="57.0" text="Formulaire Gestion Medicament Patient">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="36.0" layoutY="142.0" text="Med_PatientID :">
+                                                         <font>
+                                                            <Font name="Calibri" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="med_patient_id_textfield" layoutX="146.0" layoutY="130.0" prefHeight="33.0" prefWidth="216.0" promptText="Med_Patient_ID" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                      <Label layoutX="36.0" layoutY="196.0" text="Qte :">
+                                                         <font>
+                                                            <Font name="Calibri" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="qte_med_pat_textfield" layoutX="146.0" layoutY="180.0" prefHeight="33.0" prefWidth="216.0" promptText="Quantité" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                      <Label layoutX="36.0" layoutY="241.0" text="Date d'Achat :">
+                                                         <font>
+                                                            <Font name="Calibri" size="14.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <DatePicker fx:id="dateAchat_med_pat_textfield" layoutX="144.0" layoutY="231.0" prefHeight="33.0" prefWidth="216.0" promptText="MM-JJ-AAAA" />
+                                                      <Button fx:id="med_pat_add_btn" layoutX="178.0" layoutY="295.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="75.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter">
+                                                         <font>
+                                                            <Font name="Calisto MT" size="14.0" />
+                                                         </font></Button>
+                                                      <Button fx:id="med_pat_update_btn" layoutX="117.0" layoutY="373.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="86.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#f8f6f6">
+                                                         <font>
+                                                            <Font name="Calisto MT" size="14.0" />
+                                                         </font></Button>
+                                                      <Button fx:id="med_pat_delete_btn" layoutX="239.0" layoutY="373.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="89.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#fcfcfc">
+                                                         <font>
+                                                            <Font name="Calisto MT" size="14.0" />
+                                                         </font></Button>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="421.0" layoutY="14.0" prefHeight="588.0" prefWidth="679.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                                   <children>
+                                                      <TableView fx:id="med_pat_table" layoutX="11.0" layoutY="14.0" prefHeight="562.0" prefWidth="654.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="med_pat_id_col" prefWidth="178.0" text="Med_PatientID" />
+                                                          <TableColumn fx:id="qte_med_pat_col" prefWidth="227.0" text="Quantité" />
+                                                            <TableColumn fx:id="dateAchat_med_pat_col" prefWidth="248.0" text="Date d'Achat" />
+                                                        </columns>
+                                                      </TableView>
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="med_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                                 <children>
+                                    <AnchorPane prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="11.0" layoutY="7.0" prefHeight="615.0" prefWidth="1115.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <AnchorPane layoutX="16.0" layoutY="11.0" prefHeight="591.0" prefWidth="363.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                                   <children>
+                                                      <Label layoutX="101.0" layoutY="14.0" text="Formulaire Medicament">
+                                                         <font>
+                                                            <Font name="Calibri Bold" size="16.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="41.0" layoutY="61.0" text="Med_ID :">
+                                                         <font>
+                                                            <Font name="Calibri" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="med_id_textfield" layoutX="110.0" layoutY="49.0" prefHeight="39.0" prefWidth="233.0" promptText="Medicament ID" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                      <Label layoutX="41.0" layoutY="121.0" prefHeight="14.0" prefWidth="35.0" text="Nom :">
+                                                         <font>
+                                                            <Font name="Calibri" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="nom_med_textfield" layoutX="110.0" layoutY="102.0" prefHeight="39.0" prefWidth="233.0" promptText="Nom" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                      <Label layoutX="41.0" layoutY="184.0" text="Description :">
+                                                         <font>
+                                                            <Font name="Calibri" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextArea fx:id="desc_med_textarea" layoutX="110.0" layoutY="159.0" prefHeight="63.0" prefWidth="233.0" promptText="Description" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                      <Label layoutX="2.0" layoutY="249.0" text="Date de Production :">
+                                                         <font>
+                                                            <Font name="Calibri" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <DatePicker fx:id="date_prod_med" layoutX="110.0" layoutY="239.0" prefHeight="34.0" prefWidth="233.0" promptText="MM-JJ-AAAA" />
+                                                      <Label layoutX="2.0" layoutY="295.0" text="Date d'Experation :">
+                                                         <font>
+                                                            <Font name="Calibri" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <DatePicker fx:id="date_exper_med" layoutX="110.0" layoutY="278.0" prefHeight="34.0" prefWidth="233.0" promptText="MM-JJ-AAAA" />
+                                                      <Label layoutX="41.0" layoutY="336.0" text="Qte :">
+                                                         <font>
+                                                            <Font name="Calibri" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="qte_med_textfield" layoutX="110.0" layoutY="324.0" prefHeight="39.0" prefWidth="233.0" promptText="Quantité" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                      <Label layoutX="41.0" layoutY="388.0" text="Prix (PPV) :">
+                                                         <font>
+                                                            <Font name="Calibri" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <TextField fx:id="prix_med_textfield" layoutX="110.0" layoutY="375.0" prefHeight="39.0" prefWidth="233.0" promptText="Prix PPV" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                      <Label layoutX="41.0" layoutY="443.0" text="Stock ID :">
+                                                         <font>
+                                                            <Font name="Calibri" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ComboBox fx:id="stock_id_med_comboBox" layoutX="110.0" layoutY="433.0" prefHeight="33.0" prefWidth="233.0" />
+                                                      <Label layoutX="2.0" layoutY="485.0" text="Date d'Achat Patient :">
+                                                         <font>
+                                                            <Font name="Calibri" size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <ComboBox fx:id="date_achat_med_pat_comboBox" layoutX="110.0" layoutY="475.0" prefHeight="33.0" prefWidth="233.0" />
+                                                      <Button fx:id="med_add_btn" layoutX="194.0" layoutY="515.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fffdfd">
+                                                         <font>
+                                                            <Font name="Calisto MT" size="14.0" />
+                                                         </font></Button>
+                                                      <Button fx:id="med_update_btn" layoutX="111.0" layoutY="552.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fffefe">
+                                                         <font>
+                                                            <Font name="Calisto MT" size="14.0" />
+                                                         </font></Button>
+                                                      <Button fx:id="med_delete_btn" layoutX="213.0" layoutY="552.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f5efef">
+                                                         <font>
+                                                            <Font name="Calisto MT" size="14.0" />
+                                                         </font></Button>
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane layoutX="393.0" layoutY="12.0" prefHeight="591.0" prefWidth="713.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                                   <children>
+                                                      <TableView fx:id="med_table" layoutX="5.0" layoutY="45.0" prefHeight="540.0" prefWidth="704.0">
+                                                        <columns>
+                                                          <TableColumn fx:id="nom_med_col" prefWidth="70.0" text="Nom" />
+                                                          <TableColumn fx:id="desc_med_col" prefWidth="96.0" text="Description" />
+                                                            <TableColumn fx:id="date_prod_med_col" prefWidth="119.0" text="Date de Production" />
+                                                            <TableColumn fx:id="date_exper_med_col" prefWidth="115.0" text="Date d'Experation" />
+                                                            <TableColumn fx:id="qte_med_col" prefWidth="69.0" text="Quantité" />
+                                                            <TableColumn fx:id="prix_med_col" prefWidth="68.0" text="Prix" />
+                                                            <TableColumn fx:id="stock_id_med_col" prefWidth="65.0" text="Stock ID" />
+                                                            <TableColumn fx:id="date_achat_med_col" prefWidth="106.0" text="Date d'Achat" />
+                                                        </columns>
+                                                      </TableView>
+                                                      <TextField fx:id="search_med_textfield" layoutX="6.0" layoutY="6.0" prefHeight="34.0" prefWidth="274.0" promptText="Chercher Par Nom " styleClass="textfield" stylesheets="@adminDashboard.css">
+                                                         <font>
+                                                            <Font name="Calisto MT Bold" size="12.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="40.0" />
+                                                         </padding>
+                                                      </TextField>
+                                                      <FontAwesomeIcon glyphName="SEARCH" layoutX="30.0" layoutY="30.0" size="1.5em" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="fournisseur_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                                 <children>
+                                    <AnchorPane prefHeight="630.0" prefWidth="1134.0" styleClass="board" stylesheets="@adminDashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="612.0" prefWidth="347.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <Label layoutX="106.0" layoutY="41.0" text="Formulaire Fournisseur">
+                                                   <font>
+                                                      <Font name="Calibri Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="38.0" layoutY="147.0" text="Nom :" />
+                                                <TextField fx:id="fournisseur_nom" layoutX="92.0" layoutY="132.0" prefHeight="36.0" prefWidth="215.0" promptText="Nom" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="38.0" layoutY="189.0" text="Prenom :" />
+                                                <TextField fx:id="fournisseur_prenom" layoutX="92.0" layoutY="180.0" prefHeight="36.0" prefWidth="215.0" promptText="Prenom" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="25.0" layoutY="241.0" text="Telephone :" />
+                                                <TextField fx:id="fournisseur_tel" layoutX="92.0" layoutY="232.0" prefHeight="36.0" prefWidth="215.0" promptText="Telephone" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="25.0" layoutY="297.0" text="Stock ID :" />
+                                                <ComboBox fx:id="fournisseur_stock_id" layoutX="92.0" layoutY="286.0" prefHeight="36.0" prefWidth="215.0" />
+                                                <Button fx:id="fournisseur_btn_add" layoutX="148.0" layoutY="342.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="64.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#f5eeee">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font></Button>
+                                                <Button fx:id="fournisseur_btn_update" layoutX="103.0" layoutY="412.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#f8f4f4">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font></Button>
+                                                <Button fx:id="fournisseur_btn_delete" layoutX="209.0" layoutY="412.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="82.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#fcf8f8">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font></Button>
+                                                <Label layoutX="3.0" layoutY="94.0" text="Fournisseur ID :" />
+                                                <TextField fx:id="fournisseur_id" layoutX="89.0" layoutY="84.0" prefHeight="36.0" prefWidth="215.0" promptText="Fournisseur ID" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="368.0" layoutY="9.0" prefHeight="612.0" prefWidth="759.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <TableView fx:id="fournisseur_table_view" layoutX="5.0" layoutY="7.0" prefHeight="599.0" prefWidth="747.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="fournisseur_nom_col" prefWidth="124.0" text="Nom" />
+                                                    <TableColumn fx:id="fournisseur_prenom_col" prefWidth="123.0" text="Prenom" />
+                                                      <TableColumn fx:id="fournisseur_tel_col" prefWidth="118.0" text="Telephone" />
+                                                      <TableColumn fx:id="fournisseur_stock_qte_col" minWidth="0.0" prefWidth="171.0" text="Stock Qte" />
+                                                      <TableColumn fx:id="fournisseur_id_col" prefWidth="276.0" text="Fournisseur ID" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="gestion_pat_facture_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                                 <children>
+                                    <AnchorPane prefHeight="630.0" prefWidth="1134.0" styleClass="board" stylesheets="@adminDashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="8.0" layoutY="10.0" prefHeight="615.0" prefWidth="416.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <Label layoutX="83.0" layoutY="46.0" text="Formulaire Gestion Patient Facture">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="27.0" layoutY="131.0" text="Pat_Facture ID :" />
+                                                <TextField fx:id="pat_facture_id" layoutX="124.0" layoutY="117.0" prefHeight="35.0" prefWidth="241.0" promptText="Patient Facture ID" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="3.0" layoutY="193.0" text="Date de Transaction :" />
+                                                <DatePicker fx:id="date_transaction" layoutX="124.0" layoutY="179.0" prefHeight="35.0" prefWidth="241.0" promptText="MM-JJ-AAAA" />
+                                                <Button fx:id="pat_facture_btn_add" layoutX="193.0" layoutY="262.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="64.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfcfc">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="pat_facture_btn_update" layoutX="125.0" layoutY="335.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#f2f2f2">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="pat_facture_btn_delete" layoutX="254.0" layoutY="335.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#fcf9f9">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="431.0" layoutY="11.0" prefHeight="615.0" prefWidth="697.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <TableView fx:id="pat_facture_table_view" layoutX="8.0" layoutY="7.0" prefHeight="602.0" prefWidth="681.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="pat_facture_id_col" prefWidth="242.0" text="Pat_Facture ID" />
+                                                    <TableColumn fx:id="date_transaction_col" prefWidth="437.0" text="Date de Transaction" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="facture_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                                 <children>
+                                    <AnchorPane prefHeight="630.0" prefWidth="1134.0" styleClass="board" stylesheets="@adminDashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="8.0" layoutY="7.0" prefHeight="617.0" prefWidth="427.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <Label layoutX="154.0" layoutY="42.0" text="Formulaire Facture">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="41.0" layoutY="138.0" text="Facture ID :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="facture_id" layoutX="124.0" layoutY="119.0" prefHeight="39.0" prefWidth="246.0" promptText="Facture ID" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="5.0" layoutY="191.0" text="Date de Transaction :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="date_trans_id_comboBox" layoutX="124.0" layoutY="177.0" prefHeight="39.0" prefWidth="246.0" />
+                                                <Button fx:id="facture_btn_add" layoutX="214.0" layoutY="253.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfcfc">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="facture_btn_update" layoutX="134.0" layoutY="309.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="74.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#f5f2f2">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="facture_btn_delete" layoutX="255.0" layoutY="310.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="81.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f5f3f3">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="444.0" layoutY="7.0" prefHeight="617.0" prefWidth="684.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <TableView fx:id="facture_table" layoutX="7.0" layoutY="7.0" prefHeight="604.0" prefWidth="668.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="facture_id_col" prefWidth="86.0" text="Facture ID" />
+                                                    <TableColumn fx:id="facture_date_trans_col" prefWidth="138.0" text="Date de Transaction" />
+                                                      <TableColumn fx:id="facture_total_col" prefWidth="118.0" text="Total" />
+                                                      <TableColumn fx:id="facture_med_col" prefWidth="120.0" text="Medicament" />
+                                                      <TableColumn fx:id="facture_pat_col" prefWidth="110.0" text="Patient" />
+                                                      <TableColumn fx:id="facture_qte_col" prefWidth="94.0" text="Quantite" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="docteur_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                                 <children>
+                                    <AnchorPane layoutX="106.0" layoutY="78.0" prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="13.0" layoutY="11.0" prefHeight="610.0" prefWidth="422.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <Label layoutX="150.0" layoutY="40.0" text="Formulaire Docteur">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="42.0" layoutY="124.0" text="Docteur ID :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="docteur_id" layoutX="130.0" layoutY="110.0" prefHeight="35.0" prefWidth="231.0" promptText="Docteur ID" styleClass="textfield" stylesheets="@adminDashboard.css">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="12.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label layoutX="42.0" layoutY="174.0" text="Nom :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="docteur_nom" layoutX="130.0" layoutY="160.0" prefHeight="35.0" prefWidth="231.0" promptText="Nom" styleClass="textfield" stylesheets="@adminDashboard.css">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="12.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label layoutX="42.0" layoutY="227.0" text="Prenom :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="docteur_prenom" layoutX="130.0" layoutY="213.0" prefHeight="35.0" prefWidth="231.0" promptText="Prenom" styleClass="textfield" stylesheets="@adminDashboard.css">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="12.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label layoutX="42.0" layoutY="277.0" text="Telephone :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="docteur_tel" layoutX="130.0" layoutY="263.0" prefHeight="35.0" prefWidth="231.0" promptText="Telephone" styleClass="textfield" stylesheets="@adminDashboard.css">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="12.0" />
+                                                   </font>
+                                                </TextField>
+                                                <Label layoutX="44.0" layoutY="331.0" text="Specialité :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="docteur_specialite_comboBox" layoutX="131.0" layoutY="315.0" prefHeight="35.0" prefWidth="231.0" />
+                                                <Button fx:id="docteur_btn_add" layoutX="196.0" layoutY="391.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#f8f6f6">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="docteur_btn_update" layoutX="133.0" layoutY="475.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="75.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fffafa">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="docteur_btn_delete" layoutX="242.0" layoutY="475.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="81.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="445.0" layoutY="11.0" prefHeight="610.0" prefWidth="681.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <TableView fx:id="docteur_table" layoutX="6.0" layoutY="7.0" prefHeight="591.0" prefWidth="668.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="docteur_id_col" prefWidth="98.0" text="Docteur ID" />
+                                                    <TableColumn fx:id="docteur_nom_col" prefWidth="116.0" text="Nom" />
+                                                      <TableColumn fx:id="docteur_prenom_col" prefWidth="125.0" text="Prenom" />
+                                                      <TableColumn fx:id="docteur_tel_col" prefWidth="158.0" text="Telephone" />
+                                                      <TableColumn fx:id="docteur_specialite_col" prefWidth="169.0" text="Specialité" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="patient_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                                 <children>
+                                    <AnchorPane prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="8.0" layoutY="7.0" prefHeight="616.0" prefWidth="428.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <Label layoutX="147.0" layoutY="51.0" text="Formulaire Patient">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="3.0" layoutY="151.0" text="Nom :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="patient_nom" layoutX="112.0" layoutY="137.0" prefHeight="35.0" prefWidth="253.0" promptText="Nom" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="3.0" layoutY="197.0" text="Prenom :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="patient_prenom" layoutX="112.0" layoutY="183.0" prefHeight="35.0" prefWidth="253.0" promptText="Prenom" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="3.0" layoutY="240.0" text="Telephone :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="patient_tel" layoutX="112.0" layoutY="231.0" prefHeight="35.0" prefWidth="253.0" promptText="Telephone" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="3.0" layoutY="287.0" text="Adresse :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="patient_adresse" layoutX="112.0" layoutY="278.0" prefHeight="35.0" prefWidth="253.0" promptText="Adresse" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="3.0" layoutY="333.0" text="Docteur :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="patient_docteur_comboBox" layoutX="112.0" layoutY="329.0" prefHeight="35.0" prefWidth="253.0" />
+                                                <Label layoutX="3.0" layoutY="382.0" text="Date d'Achat Med :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="patient_med_date_achat_comboBox" layoutX="112.0" layoutY="373.0" prefHeight="35.0" prefWidth="253.0" />
+                                                <Label layoutX="3.0" layoutY="430.0" text="Date d'Trans Fact :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <ComboBox fx:id="patient_fact_date_trans_comboBox" layoutX="112.0" layoutY="421.0" prefHeight="35.0" prefWidth="253.0" />
+                                                <Button fx:id="patient_btn_add" layoutX="204.0" layoutY="485.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfafa">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="patient_btn_update" layoutX="133.0" layoutY="538.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="73.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fffdfd">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="patient_btn_delete" layoutX="235.0" layoutY="538.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="83.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f5f5f5">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Label layoutX="3.0" layoutY="103.0" text="Patient ID :">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="patient_id" layoutX="113.0" layoutY="89.0" prefHeight="35.0" prefWidth="253.0" promptText="Patient ID" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="443.0" layoutY="7.0" prefHeight="616.0" prefWidth="686.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <TableView fx:id="patient_table" layoutX="6.0" layoutY="6.0" prefHeight="605.0" prefWidth="673.0" stylesheets="@adminDashboard.css">
+                                                  <columns>
+                                                    <TableColumn fx:id="patient_nom_col" prefWidth="65.0" text="Nom" />
+                                                    <TableColumn fx:id="patient_prenom_col" prefWidth="73.0" text="Prenom" />
+                                                      <TableColumn fx:id="patient_tel_col" text="Telephone" />
+                                                      <TableColumn fx:id="patient_adresse_col" prefWidth="121.0" text="Adresse" />
+                                                      <TableColumn fx:id="patient_docteur_col" prefWidth="87.0" text="Docteur" />
+                                                      <TableColumn fx:id="patient_med_date_achat_col" prefWidth="113.0" text="Date d'Achat Med" />
+                                                      <TableColumn fx:id="patient_fact_date_trans_col" prefWidth="133.0" text="Date d'Trans Fact" />
+                                                  </columns>
+                                                </TableView>
+                                             </children></AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="users_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                                 <children>
+                                    <AnchorPane layoutX="108.0" layoutY="80.0" prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="6.0" layoutY="6.0" prefHeight="617.0" prefWidth="393.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <Label layoutX="125.0" layoutY="56.0" text="Formulaire Utilisateurs">
+                                                   <font>
+                                                      <Font name="Calisto MT Bold" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="25.0" layoutY="129.0" text="Nom :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="25.0" layoutY="187.0" text="Prenom :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="25.0" layoutY="244.0" text="Email :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="25.0" layoutY="305.0" text="Password :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="25.0" layoutY="366.0" text="Telephone :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="25.0" layoutY="427.0" text="Type User :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="nom_user_label" layoutX="97.0" layoutY="109.0" prefHeight="44.0" prefWidth="231.0" styleClass="label-field" stylesheets="@adminDashboard.css" />
+                                                <Label fx:id="prenom_user_label" layoutX="97.0" layoutY="173.0" prefHeight="44.0" prefWidth="231.0" styleClass="label-field" stylesheets="@adminDashboard.css" />
+                                                <Label fx:id="email_user_label" layoutX="97.0" layoutY="237.0" prefHeight="44.0" prefWidth="231.0" styleClass="label-field" stylesheets="@adminDashboard.css" />
+                                                <Label fx:id="password_user_label" layoutX="97.0" layoutY="298.0" prefHeight="44.0" prefWidth="231.0" styleClass="label-field" stylesheets="@adminDashboard.css" />
+                                                <Label fx:id="tel_user_label" layoutX="97.0" layoutY="359.0" prefHeight="44.0" prefWidth="231.0" styleClass="label-field" stylesheets="@adminDashboard.css" />
+                                                <Label fx:id="type_user_label" layoutX="97.0" layoutY="420.0" prefHeight="44.0" prefWidth="231.0" styleClass="label-field" stylesheets="@adminDashboard.css" />
+                                                <Button fx:id="user_btn_delete" layoutX="166.0" layoutY="498.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="83.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                          <AnchorPane layoutX="406.0" layoutY="6.0" prefHeight="617.0" prefWidth="722.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <TableView fx:id="users_table" layoutX="6.0" layoutY="5.0" prefHeight="608.0" prefWidth="710.0">
+                                                  <columns>
+                                                    <TableColumn fx:id="nom_user_col" prefWidth="92.0" text="Nom" />
+                                                    <TableColumn fx:id="prenom_user_col" prefWidth="102.0" text="Prenom" />
+                                                      <TableColumn fx:id="email_user_col" prefWidth="152.0" text="Email" />
+                                                      <TableColumn fx:id="password_user_col" prefWidth="104.0" text="Password" />
+                                                      <TableColumn fx:id="tel_user_col" prefWidth="151.0" text="Telephone" />
+                                                      <TableColumn fx:id="type_user_col" prefWidth="107.0" text="Type Utilisateur" />
+                                                  </columns>
+                                                </TableView>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane fx:id="profile_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                                 <children>
+                                    <AnchorPane layoutX="31.0" layoutY="25.0" prefHeight="630.0" prefWidth="1134.0" styleClass="board" stylesheets="@adminDashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <children>
+                                          <AnchorPane layoutX="227.0" layoutY="26.0" prefHeight="584.0" prefWidth="661.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                             <children>
+                                                <Label layoutX="288.0" layoutY="43.0" text="Profile Admin">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="16.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="162.0" layoutY="152.0" text="Nom :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="nom_profile" layoutX="244.0" layoutY="140.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="162.0" layoutY="211.0" text="Prenom :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="prenom_profile" layoutX="244.0" layoutY="199.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="162.0" layoutY="276.0" text="Email :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="email_profile" layoutX="244.0" layoutY="264.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="162.0" layoutY="344.0" text="Password :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="162.0" layoutY="400.0" text="Telephone :">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <TextField fx:id="tel_profile" layoutX="244.0" layoutY="388.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <PasswordField fx:id="password_profile" layoutX="244.0" layoutY="329.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Button fx:id="profile_btn_update" layoutX="244.0" layoutY="462.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="77.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fcfafa">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                                <Button fx:id="profile_btn_delete" layoutX="352.0" layoutY="462.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f8f1f1">
+                                                   <font>
+                                                      <Font name="Calisto MT" size="14.0" />
+                                                   </font>
+                                                </Button>
+                                             </children>
+                                          </AnchorPane>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+      </BorderPane>
+   </children>
+</StackPane>

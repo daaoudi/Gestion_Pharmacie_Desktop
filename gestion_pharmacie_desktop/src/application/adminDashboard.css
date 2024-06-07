@@ -1,0 +1,103 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.btn{
+	-fx-background-color: transparent;
+	-fx-cursor:hand;
+	-fx-font-family:"Calibri";
+	-fx-font-size:12px;
+	-fx-text-fill:#000;
+}
+.btn-update{
+	-fx-background-color:#881ad6;
+	-fx-cursor:hand;
+	-fx-font-family:"Calibri";
+	
+	-fx-border-color: #000;
+	-fx-border-width: 1px;
+	-fx-border-radius: 4px;
+	
+}
+.btn-delete{
+		-fx-background-color:#d61a40;
+	-fx-cursor:hand;
+	-fx-font-family:"Calibri";
+
+	-fx-border-color: #000;
+	-fx-border-width: 1px;
+	-fx-border-radius: 4px;
+}
+.btn-add{
+	-fx-background-color:#1cd41c;
+	-fx-cursor:hand;
+	-fx-font-family:"Calibri";
+
+	-fx-border-color: #000;
+	-fx-border-width: 1px;
+	-fx-border-radius: 4px;
+}
+.label-field{
+	-fx-background-color:#fefefe;
+	-fx-border-radius: 4px;
+	-fx-border-color: #000;
+	-fx-border-width: 1px;
+}
+.textfield{
+	-fx-background-color:#fff;
+	-fx-border-color: linear-gradient(to top left , #419e58,#8d918e);
+	-fx-border-width: 1px;
+	-fx-border-radius: 3px;
+}
+.textfield:focused{
+	-fx-background-color:#fedfee;
+	-fx-border-color: #000;
+	-fx-border-width: 1px;
+	-fx-border-radius: 4px;
+}
+.table-view{
+	-fx-background-color: transparent;
+	-fx-border-color:linear-gradient(to bottom right,#272b3f,#256b51);
+	-fx-border-radius: 8px;
+	-fx-padding: 0px;
+}
+.table-view .table-column{
+	-fx-alignment: center ;
+}
+.table-view .column-header-background{
+	-fx-background-color:linear-gradient(to bottom right,#818c81,#256b51);
+	-fx-background-insets: 0 0 0 0;
+	-fx-background-radius: 8px 8px 0px 0px;
+}
+.table-view .column-header , .filter{
+	-fx-background-color: transparent;
+	-fx-size: 40px;
+	
+}
+.table-view .column-header  .label{
+	-fx-text-fill: #fff;
+	-fx-font-family: "Calibri";
+	-fx-font-size: 14px;
+	
+}
+.nav-form{
+	-fx-background-color: linear-gradient(to top left , #419e58,#8d918e);
+	-fx-border-color: #000;
+	-fx-border-width: 1px;
+	-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.5),6,0,0,0); 
+}
+.nav-head{
+	-fx-background-color: #fff;
+	-fx-border-color: #000;
+	-fx-border-width: 1px;
+	
+}
+.board{
+	-fx-background-color: #fff;
+	-fx-border-radius: 5px;
+	-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.5),6,0,0,0); 
+}
+.mini-board{
+	-fx-background-color: linear-gradient(to top right , #5562ed,#bcc1f5);
+		-fx-border-radius: 4px;
+		-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.5),6,0,0,0); 
+		-fx-border-color: #000;
+		-fx-border-width: 1px;
+}
