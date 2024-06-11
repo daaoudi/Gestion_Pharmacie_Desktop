@@ -6,6 +6,36 @@
 	-fx-font-size:12px;
 	-fx-text-fill:#000;
 }
+.btn-close{
+	-fx-background-color: transparent;
+	-fx-border-color: linear-gradient(to bottom left , #8feba6,#8d918e);
+	-fx-border-width: 1px;
+	-fx-border-radius: 3px;
+}
+.btn-close:hover{
+	-fx-background-color: #f05e41;
+	-fx-border-color: #000;
+	-fx-border-width: 1.5px;
+	-fx-cursor: hand;
+}
+.btn-minimize{
+	-fx-background-color: transparent;
+	-fx-border-color: linear-gradient(to bottom left , #8feba6,#8d918e);
+	-fx-border-width: 1px;
+	-fx-border-radius: 3px;
+}
+.btn-minimize:hover{
+	-fx-background-color: #7ff08a;
+	-fx-border-color: #000;
+	-fx-border-width: 1.5px;
+	-fx-cursor: hand;
+}
+.btn-logout:hover{
+	-fx-cursor: hand;
+	-fx-size: 14px;
+	-fx-background-color: #db1a14;
+	
+}
 .btn-update{
 	-fx-background-color:#881ad6;
 	-fx-cursor:hand;

@@ -13,7 +13,7 @@ static Connection conn = null;
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/gestion_pharmacie?" +
+			conn=DriverManager.getConnection("jdbc:mysql://localhost:3307/gestionpharmacie?" +
                     "user=root&password=D@oudi97");
 			
 		}catch (SQLException ex) {

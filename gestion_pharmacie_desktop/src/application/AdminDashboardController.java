@@ -2,10 +2,12 @@ package application;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -13,7 +15,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -28,13 +33,19 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class AdminDashboardController implements Initializable {
 	private Connection conn;
 	private PreparedStatement pst;
 	private Statement statement;
 	private ResultSet rs;
+	
+	  @FXML
+	    private AnchorPane main_form;
 	
 	 @FXML
 	    private Button add_stock_btn;
@@ -49,7 +60,7 @@ public class AdminDashboardController implements Initializable {
 	    private DatePicker dateAchat_med_pat_textfield;
 
 	    @FXML
-	    private TableColumn<?, ?> date_achat_med_col;
+	    private TableColumn<MedPatient, Date> date_achat_med_col;
 
 	    @FXML
 	    private ComboBox<?> date_achat_med_pat_comboBox;
@@ -274,10 +285,10 @@ public class AdminDashboardController implements Initializable {
 	    private Button med_pat_delete_btn;
 
 	    @FXML
-	    private TableColumn<?, ?> med_pat_id_col;
+	    private TableColumn<MedPatient, String> med_pat_id_col;
 
 	    @FXML
-	    private TableView<?> med_pat_table;
+	    private TableView<MedPatient> med_pat_table;
 
 	    @FXML
 	    private Button med_pat_update_btn;
@@ -439,7 +450,7 @@ public class AdminDashboardController implements Initializable {
 	    private TableColumn<?, ?> qte_med_col;
 
 	    @FXML
-	    private TableColumn<?, ?> qte_med_pat_col;
+	    private TableColumn<MedPatient, Integer> qte_med_pat_col;
 
 	    @FXML
 	    private TextField qte_med_pat_textfield;
@@ -592,7 +603,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		
+	    		showListDataMedPatient();
 	    	}else if(event.getSource()==medicament_btn) {
 	    		med_form.setVisible(true);
 	    		fournisseur_form.setVisible(false);
@@ -990,11 +1001,272 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    	stock_id_textfield.setText("");
 	    	qte_textfield.setText("");
 	    }
+	    
+	    public void insertMedPatient() {
+	    	
+	    	String sql=" INSERT INTO gestion_med_patient ( med_patient_id,qte_med_patient,date_achat ) VALUES(?,?,?) ";
+	    	try {
+	    		Alert alert;
+	    		if (med_patient_id_textfield.getText().isEmpty()
+	    				|| qte_med_pat_textfield.getText().isEmpty()
+	    				|| dateAchat_med_pat_textfield.getValue().equals(null)) {
+	    			alert=new Alert(AlertType.ERROR);
+	    			alert.setTitle("Message d'erreur !!");
+	    			alert.setHeaderText(null);
+	    			alert.setContentText("s'il vous plait remplir tous les champs !");
+	    			alert.showAndWait();
+	    		}else {
+	    			conn=DatabaseConnection.getConnection();
+	    			String check=" SELECT * FROM gestion_med_patient WHERE med_patient_id=' "+med_patient_id_textfield.getText() + " ' ";
+	    			statement=conn.createStatement();
+	    			rs=statement.executeQuery(check);
+	    			if(rs.next()) {
+	    				alert=new Alert(AlertType.ERROR);
+	    				alert.setTitle("Message d'erreur !!");
+	        			alert.setHeaderText(null);
+	        			alert.setContentText(" Stock ID : "+stock_id_textfield.getText() + "déja exist dans la base de données !!");
+	        			alert.showAndWait();
+	    			}else {
+	    				pst=conn.prepareStatement(sql);
+	    				pst.setString(1, med_patient_id_textfield.getText());
+	    				pst.setInt(2, Integer.parseInt(qte_med_pat_textfield.getText()));
+	    				pst.setDate(3, Date.valueOf(dateAchat_med_pat_textfield.getValue()));
+	    				pst.executeUpdate();
+	    				
+	    				alert=new Alert(AlertType.INFORMATION);
+	    				alert.setTitle("Message d'information !");
+	    				alert.setHeaderText(null);
+	    				alert.setContentText(" Médicament de Patient Ajouté avec succés !✔  ");
+	    				alert.showAndWait();
+	    				showListDataMedPatient();
+	    				resetMedPatient();
+	    			}
+	    		}
+	    		
+	    	}catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	
+	    }
+	    
+	    public void updateMedPatient() {
+	    	String sql = "UPDATE gestion_med_patient SET qte_med_patient = ?,date_achat=? WHERE med_patient_id = ?";
+
+	        try {
+	            Alert alert;
+	           
+	            conn = DatabaseConnection.getConnection();
+
+	            String medPatientId = med_patient_id_textfield.getText();
+	            String qteMedPatient = qte_med_pat_textfield.getText();
+	            LocalDate dateAchat=dateAchat_med_pat_textfield.getValue();
+
+	            if (medPatientId.isEmpty() ||
+	            		qteMedPatient.isEmpty() || dateAchat==null
+	            		 ) {
+	                alert = new Alert(Alert.AlertType.ERROR);
+	                alert.setTitle("Message d'erreur !!");
+	                alert.setHeaderText(null);
+	                alert.setContentText("S'il vous plaît, cliquez sur l'élément que vous voulez modifier !");
+	                alert.showAndWait();
+	            } else {
+	                alert = new Alert(Alert.AlertType.CONFIRMATION);
+	                alert.setTitle("Message de Confirmation !");
+	                alert.setHeaderText(null);
+	                alert.setContentText("Vous êtes sûr de vouloir modifier cet élément avec cet ID ? : " + medPatientId + " ?");
+	                Optional<ButtonType> option = alert.showAndWait();
+
+	                if (option.isPresent() && option.get() == ButtonType.OK) {
+	                    try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+	                        preparedStatement.setInt(1, Integer.parseInt(qteMedPatient));
+	                        preparedStatement.setDate(2, Date.valueOf(dateAchat));
+	                        preparedStatement.setString(3, medPatientId);
+
+	                        int rowsUpdated = preparedStatement.executeUpdate();
+	                        if (rowsUpdated > 0) {
+	                            alert = new Alert(Alert.AlertType.INFORMATION);
+	                            alert.setTitle("Message d'information");
+	                            alert.setHeaderText(null);
+	                            alert.setContentText("Mise à jour réussie ✔ !");
+	                            alert.showAndWait();
+	                            showListDataMedPatient();
+	                            resetMedPatient();
+	                        } else {
+	                            alert = new Alert(Alert.AlertType.WARNING);
+	                            alert.setTitle("Avertissement");
+	                            alert.setHeaderText(null);
+	                            alert.setContentText("Aucun élément trouvé avec cet ID.");
+	                            alert.showAndWait();
+	                        }
+	                    }
+	                }
+	            }
+	        } catch (SQLException | ClassNotFoundException e) {
+	            e.printStackTrace();
+	            Alert alert = new Alert(Alert.AlertType.ERROR);
+	            alert.setTitle("Erreur SQL");
+	            alert.setHeaderText(null);
+	            alert.setContentText("Erreur lors de la mise à jour de l'élément : " + e.getMessage());
+	            alert.showAndWait();
+	        }
+	    }
+	    
+	    public void deleteMedPatient() {
+	    	String sql=" DELETE FROM gestion_med_patient WHERE med_patient_id=? ";
+	    	try {
+	    		Alert alert;
+	    		conn=DatabaseConnection.getConnection();
+	    		String medPatientId = med_patient_id_textfield.getText();
+	            String qteMedPatient = qte_med_pat_textfield.getText();
+	            LocalDate dateAchat=dateAchat_med_pat_textfield.getValue();
+	    		if (medPatientId.isEmpty() || qteMedPatient.isEmpty() 
+	    				|| dateAchat==null) {
+	                alert = new Alert(Alert.AlertType.ERROR);
+	                alert.setTitle("Message d'erreur !!");
+	                alert.setHeaderText(null);
+	                alert.setContentText("S'il vous plaît, cliquez sur l'élément que vous voulez supprimer !");
+	                alert.showAndWait();
+	            }else {
+	                alert = new Alert(Alert.AlertType.CONFIRMATION);
+	                alert.setTitle("Message de Confirmation !");
+	                alert.setHeaderText(null);
+	                alert.setContentText("Vous êtes sûr de vouloir supprimer cet élément avec cet ID ? : " + medPatientId + " ?");
+	                Optional<ButtonType> option = alert.showAndWait();
+
+	                if (option.isPresent() && option.get() == ButtonType.OK) {
+	                    try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+	                        
+	                        preparedStatement.setString(1, medPatientId);
+
+	                        int rowsUpdated = preparedStatement.executeUpdate();
+	                        if (rowsUpdated > 0) {
+	                            alert = new Alert(Alert.AlertType.INFORMATION);
+	                            alert.setTitle("Message d'information");
+	                            alert.setHeaderText(null);
+	                            alert.setContentText("Supprimer avec succés ✔ !");
+	                            alert.showAndWait();
+	                            showListDataStockMed();
+	                            resetStockMed();
+	                        } else {
+	                            alert = new Alert(Alert.AlertType.WARNING);
+	                            alert.setTitle("Avertissement");
+	                            alert.setHeaderText(null);
+	                            alert.setContentText("Aucun élément trouvé avec cet ID.");
+	                            alert.showAndWait();
+	                        }
+	                    }
+	                }
+	            }
+	    	}catch(SQLException | ClassNotFoundException e) {
+	    		e.printStackTrace();
+	            Alert alert = new Alert(Alert.AlertType.ERROR);
+	            alert.setTitle("Erreur SQL");
+	            alert.setHeaderText(null);
+	            alert.setContentText("Erreur lors de la supprimer cette l'élément : " + e.getMessage());
+	            alert.showAndWait();
+	    	}
+	    	
+	    }
+	    
+	    public ObservableList<MedPatient> listDataMedPatient(){
+	    	ObservableList<MedPatient> listData= FXCollections.observableArrayList();
+	    	String sql=" SELECT * FROM gestion_med_patient ";
+	    	try {
+	    		conn = DatabaseConnection.getConnection();
+	    		pst=conn.prepareStatement(sql);
+	    		rs=pst.executeQuery();
+	    		
+	    		MedPatient medPatient;
+	    		while(rs.next()) {
+	    			medPatient=new MedPatient();
+	    			medPatient.setMedPatientId(rs.getString("med_patient_id"));
+	    			medPatient.setQteMedPatient(rs.getInt("qte_med_patient"));
+	    			medPatient.setDateAchat(rs.getDate("date_achat"));
+	    			listData.add(medPatient);
+	    		}
+	    		
+	    	}catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	return listData;
+	    }
+	    private ObservableList<MedPatient> MedPatientList;
+	    
+	    public void showListDataMedPatient() {
+	    	MedPatientList=listDataMedPatient();
+	    	med_pat_id_col.setCellValueFactory(new PropertyValueFactory<>("medPatientId"));
+	    	qte_med_pat_col.setCellValueFactory(new PropertyValueFactory<>("qteMedPatient"));
+	    	dateAchat_med_pat_col.setCellValueFactory(new PropertyValueFactory<>("dateAchat"));
+	    	med_pat_table.setItems(MedPatientList);
+	    }
+	    
+	    public void selectMedPatient() {
+	    	MedPatient medPatient=med_pat_table.getSelectionModel().getSelectedItem();
+	    	int num=med_pat_table.getSelectionModel().getSelectedIndex();
+	    	if(num-1<-1) {
+	    		return;
+	    	}
+	    	med_patient_id_textfield.setText(medPatient.getMedPatientId());
+	    	qte_med_pat_textfield.setText(String.valueOf(medPatient.getQteMedPatient()));
+	    	dateAchat_med_pat_textfield.setValue(medPatient.getDateAchat().toLocalDate() );
+	    }
+	    
+	    public void resetMedPatient() {
+	    	med_patient_id_textfield.setText("");
+	    	qte_med_pat_textfield.setText("");
+	    	dateAchat_med_pat_textfield.setValue(null);
+	    }
+	    
+	    private double x=0;
+	    private double y=0;
+	    public void logout() {
+	    	Alert alert = new Alert(AlertType.CONFIRMATION);
+	    	alert.setTitle("Confirmation Message !");
+	    	alert.setHeaderText(null);
+	    	alert.setContentText("Êtes-vous sûr de vouloir vous déconnecter de l'application ? ");
+	    	Optional<ButtonType> option=alert.showAndWait();
+	    	try {
+	    		if(option.get().equals(ButtonType.OK)) {
+	    			logout_btn.getScene().getWindow().hide();
+	    			Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+	    			Stage stage=new Stage();
+	    			Scene scene=new Scene(root);
+	    			root.setOnMousePressed((MouseEvent event) ->{
+	    				x=event.getSceneX();
+	    				y=event.getSceneY();
+	    			});
+	    			root.setOnMouseDragged((MouseEvent event)->{
+	    				stage.setX(event.getScreenX()-x);
+	    				stage.setY(event.getScreenY()-y);
+	    				stage.setOpacity(.8);
+	    			});
+	    			root.setOnMouseReleased((MouseEvent event)->{
+	    				stage.setOpacity(1);
+	    			});
+	    			stage.initStyle(StageStyle.TRANSPARENT);
+	    			stage.setScene(scene);
+	    			stage.show();
+	    		}
+	    	}catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    }
+	    
+	    public void close() {
+	    	System.exit(0);
+	    }
+	    
+	    public void minimize() {
+	    	Stage stage=(Stage) main_form.getScene().getWindow();
+	    	stage.setIconified(true);
+	    }
+	    
 	
 	 @Override
 		public void initialize(URL url,ResourceBundle rb) {
 			//
 		 showListDataStockMed();
+		 showListDataMedPatient();
 	    	
 		}
 
