@@ -46,6 +46,12 @@ public class AdminDashboardController implements Initializable {
 	
 	  @FXML
 	    private AnchorPane main_form;
+	  
+	  @FXML
+	    private AnchorPane main_form2;
+	  
+	  @FXML
+	    private AnchorPane main_form3;
 	
 	 @FXML
 	    private Button add_stock_btn;
