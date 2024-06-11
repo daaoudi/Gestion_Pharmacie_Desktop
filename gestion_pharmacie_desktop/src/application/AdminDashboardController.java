@@ -3,13 +3,21 @@ package application;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -18,11 +26,15 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 public class AdminDashboardController implements Initializable {
 	private Connection conn;
 	private PreparedStatement pst;
+	private Statement statement;
+	private ResultSet rs;
 	
 	 @FXML
 	    private Button add_stock_btn;
@@ -436,7 +448,7 @@ public class AdminDashboardController implements Initializable {
 	    private TextField qte_med_textfield;
 
 	    @FXML
-	    private TableColumn<?, ?> qte_stock_col;
+	    private TableColumn<StockMed, Integer> qte_stock_col;
 
 	    @FXML
 	    private TextField qte_textfield;
@@ -448,7 +460,7 @@ public class AdminDashboardController implements Initializable {
 	    private Button stock_btn;
 
 	    @FXML
-	    private TableColumn<?, ?> stock_id_col;
+	    private TableColumn<StockMed, String> stock_id_col;
 
 	    @FXML
 	    private TableColumn<?, ?> stock_id_med_col;
@@ -466,7 +478,7 @@ public class AdminDashboardController implements Initializable {
 	    private Label stock_qte;
 
 	    @FXML
-	    private TableView<?> stock_table;
+	    private TableView<StockMed> stock_table;
 
 	    @FXML
 	    private TextField tel_profile;
@@ -554,6 +566,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		showListDataStockMed();
 	    		
 	    	}else if(event.getSource()==gestion_med_pat_btn) {
 	    		gestion_med_pat_form.setVisible(true);
@@ -780,12 +793,208 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    	}
 	    }
 	
-	
+	    public void insertStockMed() {
+	    	String sql=" INSERT INTO stock_med ( stock_id,qte_stock ) VALUES(?,?) ";
+	    	try {
+	    		Alert alert;
+	    		if (stock_id_textfield.getText().isEmpty()|| qte_textfield.getText().isEmpty()) {
+	    			alert=new Alert(AlertType.ERROR);
+	    			alert.setTitle("Message d'erreur !!");
+	    			alert.setHeaderText(null);
+	    			alert.setContentText("s'il vous plait remplir tous les champs !");
+	    			alert.showAndWait();
+	    		}else {
+	    			conn=DatabaseConnection.getConnection();
+	    			String check=" SELECT * FROM stock_med WHERE stock_id=' "+stock_id_textfield.getText() + " ' ";
+	    			statement=conn.createStatement();
+	    			rs=statement.executeQuery(check);
+	    			if(rs.next()) {
+	    				alert=new Alert(AlertType.ERROR);
+	    				alert.setTitle("Message d'erreur !!");
+	        			alert.setHeaderText(null);
+	        			alert.setContentText(" Stock ID : "+stock_id_textfield.getText() + "déja exist dans la base de données !!");
+	        			alert.showAndWait();
+	    			}else {
+	    				pst=conn.prepareStatement(sql);
+	    				pst.setString(1, stock_id_textfield.getText());
+	    				pst.setInt(2, Integer.parseInt(qte_textfield.getText()));
+	    				pst.executeUpdate();
+	    				
+	    				alert=new Alert(AlertType.INFORMATION);
+	    				alert.setTitle("Message d'information !");
+	    				alert.setHeaderText(null);
+	    				alert.setContentText("Stock Médicament Ajouté avec succés !✔  ");
+	    				alert.showAndWait();
+	    				showListDataStockMed();
+	    				resetStockMed();
+	    			}
+	    		}
+	    		
+	    	}catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    }
+	    
+	    public void updateStockMed() {
+	    	String sql = "UPDATE stock_med SET qte_stock = ? WHERE stock_id = ?";
+
+	        try {
+	            Alert alert;
+	            conn = DatabaseConnection.getConnection();
+
+	            String stockId = stock_id_textfield.getText();
+	            String qteStock = qte_textfield.getText();
+
+	            if (stockId.isEmpty() || qteStock.isEmpty()) {
+	                alert = new Alert(Alert.AlertType.ERROR);
+	                alert.setTitle("Message d'erreur !!");
+	                alert.setHeaderText(null);
+	                alert.setContentText("S'il vous plaît, cliquez sur l'élément que vous voulez modifier !");
+	                alert.showAndWait();
+	            } else {
+	                alert = new Alert(Alert.AlertType.CONFIRMATION);
+	                alert.setTitle("Message de Confirmation !");
+	                alert.setHeaderText(null);
+	                alert.setContentText("Vous êtes sûr de vouloir modifier cet élément avec cet ID ? : " + stockId + " ?");
+	                Optional<ButtonType> option = alert.showAndWait();
+
+	                if (option.isPresent() && option.get() == ButtonType.OK) {
+	                    try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+	                        preparedStatement.setInt(1, Integer.parseInt(qteStock));
+	                        preparedStatement.setString(2, stockId);
+
+	                        int rowsUpdated = preparedStatement.executeUpdate();
+	                        if (rowsUpdated > 0) {
+	                            alert = new Alert(Alert.AlertType.INFORMATION);
+	                            alert.setTitle("Message d'information");
+	                            alert.setHeaderText(null);
+	                            alert.setContentText("Mise à jour réussie ✔ !");
+	                            alert.showAndWait();
+	                            showListDataStockMed();
+	                            resetStockMed();
+	                        } else {
+	                            alert = new Alert(Alert.AlertType.WARNING);
+	                            alert.setTitle("Avertissement");
+	                            alert.setHeaderText(null);
+	                            alert.setContentText("Aucun élément trouvé avec cet ID.");
+	                            alert.showAndWait();
+	                        }
+	                    }
+	                }
+	            }
+	        } catch (SQLException | ClassNotFoundException e) {
+	            e.printStackTrace();
+	            Alert alert = new Alert(Alert.AlertType.ERROR);
+	            alert.setTitle("Erreur SQL");
+	            alert.setHeaderText(null);
+	            alert.setContentText("Erreur lors de la mise à jour de l'élément : " + e.getMessage());
+	            alert.showAndWait();
+	        }
+	    }
+	    
+	    public void deleteStockMed() {
+	    	String sql=" DELETE FROM stock_med WHERE stock_id=? ";
+	    	try {
+	    		Alert alert;
+	    		conn=DatabaseConnection.getConnection();
+	    		String stockId=stock_id_textfield.getText();
+	    		String qteStock = qte_textfield.getText();
+	    		if (stockId.isEmpty() || qteStock.isEmpty()) {
+	                alert = new Alert(Alert.AlertType.ERROR);
+	                alert.setTitle("Message d'erreur !!");
+	                alert.setHeaderText(null);
+	                alert.setContentText("S'il vous plaît, cliquez sur l'élément que vous voulez supprimer !");
+	                alert.showAndWait();
+	            }else {
+	                alert = new Alert(Alert.AlertType.CONFIRMATION);
+	                alert.setTitle("Message de Confirmation !");
+	                alert.setHeaderText(null);
+	                alert.setContentText("Vous êtes sûr de vouloir supprimer cet élément avec cet ID ? : " + stockId + " ?");
+	                Optional<ButtonType> option = alert.showAndWait();
+
+	                if (option.isPresent() && option.get() == ButtonType.OK) {
+	                    try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+	                        
+	                        preparedStatement.setString(1, stockId);
+
+	                        int rowsUpdated = preparedStatement.executeUpdate();
+	                        if (rowsUpdated > 0) {
+	                            alert = new Alert(Alert.AlertType.INFORMATION);
+	                            alert.setTitle("Message d'information");
+	                            alert.setHeaderText(null);
+	                            alert.setContentText("Supprimer avec succés ✔ !");
+	                            alert.showAndWait();
+	                            showListDataStockMed();
+	                            resetStockMed();
+	                        } else {
+	                            alert = new Alert(Alert.AlertType.WARNING);
+	                            alert.setTitle("Avertissement");
+	                            alert.setHeaderText(null);
+	                            alert.setContentText("Aucun élément trouvé avec cet ID.");
+	                            alert.showAndWait();
+	                        }
+	                    }
+	                }
+	            }
+	    	}catch(SQLException | ClassNotFoundException e) {
+	    		e.printStackTrace();
+	            Alert alert = new Alert(Alert.AlertType.ERROR);
+	            alert.setTitle("Erreur SQL");
+	            alert.setHeaderText(null);
+	            alert.setContentText("Erreur lors de la supprimer cette l'élément : " + e.getMessage());
+	            alert.showAndWait();
+	    	}
+	    }
+	    
+	    public ObservableList<StockMed> listDataStockMed(){
+	    	ObservableList<StockMed> listData= FXCollections.observableArrayList();
+	    	String sql=" SELECT * FROM stock_med " ;
+	    	try {
+	    		conn = DatabaseConnection.getConnection();
+	    		pst=conn.prepareStatement(sql);
+	    		rs=pst.executeQuery();
+	    		
+	    		StockMed stockMed;
+	    		while(rs.next()) {
+	    			stockMed=new StockMed();
+	    			stockMed.setStockId(rs.getString("stock_id"));
+	    			stockMed.setQteStock(rs.getInt("qte_stock"));
+	    			listData.add(stockMed);
+	    		}
+	    		
+	    		
+	    	}catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    	return listData;
+	    }
+	    private ObservableList<StockMed> StockMedList;
+	    
+	    public void showListDataStockMed() {
+	    	StockMedList=listDataStockMed();
+	    	stock_id_col.setCellValueFactory(new PropertyValueFactory<>("stockId"));
+	    	qte_stock_col.setCellValueFactory(new PropertyValueFactory<>("qteStock"));
+	    	stock_table.setItems(StockMedList);
+	    }
+	    
+	    public void selectStockMed() {
+	    	StockMed stockMed=stock_table.getSelectionModel().getSelectedItem();
+	    	int num=stock_table.getSelectionModel().getSelectedIndex();
+	    	if(num-1<-1) {
+	    		return;
+	    	}
+	    	stock_id_textfield.setText(stockMed.getStockId());
+	    	qte_textfield.setText(String.valueOf(stockMed.getQteStock()));
+	    }
+	    public void resetStockMed() {
+	    	stock_id_textfield.setText("");
+	    	qte_textfield.setText("");
+	    }
 	
 	 @Override
 		public void initialize(URL url,ResourceBundle rb) {
 			//
-	    	 
+		 showListDataStockMed();
 	    	
 		}
 

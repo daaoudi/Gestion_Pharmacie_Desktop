@@ -127,7 +127,7 @@
                         </AnchorPane>
                         <AnchorPane layoutX="217.0" layoutY="50.0" prefHeight="630.0" prefWidth="1134.0">
                            <children>
-                              <AnchorPane fx:id="home" prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <AnchorPane fx:id="home" prefHeight="630.0" prefWidth="1134.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <AnchorPane layoutX="8.0" layoutY="5.0" prefHeight="618.0" prefWidth="1119.0" styleClass="board" stylesheets="@adminDashboard.css">
                                        <children>
@@ -206,7 +206,7 @@
                                        </children></AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="stock_medicament_form" prefHeight="631.0" prefWidth="1134.0" visible="false">
+                              <AnchorPane fx:id="stock_medicament_form" prefHeight="631.0" prefWidth="1134.0">
                                  <children>
                                     <AnchorPane prefHeight="631.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
@@ -219,15 +219,15 @@
                                                 </Label>
                                                 <Label layoutX="25.0" layoutY="128.0" prefHeight="17.0" prefWidth="54.0" text="Stock ID :" />
                                                 <TextField fx:id="stock_id_textfield" layoutX="84.0" layoutY="117.0" prefHeight="39.0" prefWidth="219.0" promptText="Stock ID" styleClass="textfield" stylesheets="@adminDashboard.css" />
-                                                <Button fx:id="add_stock_btn" layoutX="146.0" layoutY="220.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="93.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fffefe">
+                                                <Button fx:id="add_stock_btn" layoutX="146.0" layoutY="220.0" mnemonicParsing="false" onAction="#insertStockMed" prefHeight="30.0" prefWidth="93.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fffefe">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font></Button>
-                                                <Button fx:id="update_stock_btn" layoutX="97.0" layoutY="292.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fcfcfc">
+                                                <Button fx:id="update_stock_btn" layoutX="97.0" layoutY="292.0" mnemonicParsing="false" onAction="#updateStockMed" prefHeight="32.0" prefWidth="87.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fcfcfc">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font></Button>
-                                                <Button fx:id="delete_stock_btn" layoutX="204.0" layoutY="292.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#fffdfd">
+                                                <Button fx:id="delete_stock_btn" layoutX="204.0" layoutY="292.0" mnemonicParsing="false" onAction="#deleteStockMed" prefHeight="32.0" prefWidth="87.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#fffdfd">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font></Button>
@@ -237,7 +237,7 @@
                                           </AnchorPane>
                                           <AnchorPane layoutX="399.0" layoutY="8.0" prefHeight="610.0" prefWidth="726.0" styleClass="board" stylesheets="@adminDashboard.css">
                                              <children>
-                                                <TableView fx:id="stock_table" layoutX="14.0" layoutY="31.0" prefHeight="568.0" prefWidth="697.0">
+                                                <TableView fx:id="stock_table" layoutX="14.0" layoutY="31.0" onMouseClicked="#selectStockMed" prefHeight="568.0" prefWidth="697.0">
                                                   <columns>
                                                     <TableColumn fx:id="stock_id_col" prefWidth="252.0" text="Stock ID" />
                                                     <TableColumn fx:id="qte_stock_col" minWidth="0.0" prefWidth="444.0" text="Quantité" />
