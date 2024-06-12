@@ -14,5 +14,11 @@ public class StockMed {
 	public void setQteStock(int qteStock) {
 		this.qteStock=qteStock;
 	}
+	
+	@Override
+    public String toString() {
+        return String.valueOf(qteStock); // Display qte in ComboBox
+    }
+
 
 }

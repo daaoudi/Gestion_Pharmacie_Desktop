@@ -29,5 +29,10 @@ public class MedPatient {
 	public void setDateAchat(Date dateAchat) {
 		this.dateAchat=dateAchat;
 	}
+	
+	@Override
+	public String toString() {
+		return String.valueOf(dateAchat);
+	}
 
 }

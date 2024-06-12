@@ -360,13 +360,13 @@
                                                             <Font name="Calibri" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <DatePicker fx:id="date_prod_med" layoutX="110.0" layoutY="239.0" prefHeight="34.0" prefWidth="233.0" promptText="MM-JJ-AAAA" />
+                                                      <DatePicker fx:id="date_prod_med" layoutX="110.0" layoutY="239.0" prefHeight="34.0" prefWidth="233.0" promptText="AAAA-MM-JJ" />
                                                       <Label layoutX="2.0" layoutY="295.0" text="Date d'Experation :">
                                                          <font>
                                                             <Font name="Calibri" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <DatePicker fx:id="date_exper_med" layoutX="110.0" layoutY="278.0" prefHeight="34.0" prefWidth="233.0" promptText="MM-JJ-AAAA" />
+                                                      <DatePicker fx:id="date_exper_med" layoutX="110.0" layoutY="278.0" prefHeight="34.0" prefWidth="233.0" promptText="AAAA-MM-JJ" />
                                                       <Label layoutX="41.0" layoutY="336.0" text="Qte :">
                                                          <font>
                                                             <Font name="Calibri" size="12.0" />
@@ -379,27 +379,27 @@
                                                          </font>
                                                       </Label>
                                                       <TextField fx:id="prix_med_textfield" layoutX="110.0" layoutY="375.0" prefHeight="39.0" prefWidth="233.0" promptText="Prix PPV" styleClass="textfield" stylesheets="@adminDashboard.css" />
-                                                      <Label layoutX="41.0" layoutY="443.0" text="Stock ID :">
+                                                      <Label layoutX="41.0" layoutY="443.0" text="Stock Qte :">
                                                          <font>
                                                             <Font name="Calibri" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox fx:id="stock_id_med_comboBox" layoutX="110.0" layoutY="433.0" prefHeight="33.0" prefWidth="233.0" />
+                                                      <ComboBox fx:id="stock_id_med_comboBox" layoutX="110.0" layoutY="433.0" onAction="#getStockItems" prefHeight="33.0" prefWidth="233.0" promptText="Choisir Qte Stock" />
                                                       <Label layoutX="2.0" layoutY="485.0" text="Date d'Achat Patient :">
                                                          <font>
                                                             <Font name="Calibri" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox fx:id="date_achat_med_pat_comboBox" layoutX="110.0" layoutY="475.0" prefHeight="33.0" prefWidth="233.0" />
-                                                      <Button fx:id="med_add_btn" layoutX="194.0" layoutY="515.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fffdfd">
+                                                      <ComboBox fx:id="date_achat_med_pat_comboBox" layoutX="110.0" layoutY="475.0" onAction="#getMedPatientItems" prefHeight="33.0" prefWidth="233.0" promptText="Choisir Date Achat Patient" />
+                                                      <Button fx:id="med_add_btn" layoutX="194.0" layoutY="515.0" mnemonicParsing="false" onAction="#insertMedicament" prefHeight="30.0" prefWidth="67.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fffdfd">
                                                          <font>
                                                             <Font name="Calisto MT" size="14.0" />
                                                          </font></Button>
-                                                      <Button fx:id="med_update_btn" layoutX="111.0" layoutY="552.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fffefe">
+                                                      <Button fx:id="med_update_btn" layoutX="115.0" layoutY="555.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="71.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fffefe">
                                                          <font>
                                                             <Font name="Calisto MT" size="14.0" />
                                                          </font></Button>
-                                                      <Button fx:id="med_delete_btn" layoutX="213.0" layoutY="552.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="84.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f5efef">
+                                                      <Button fx:id="med_delete_btn" layoutX="213.0" layoutY="555.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="84.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f5efef">
                                                          <font>
                                                             <Font name="Calisto MT" size="14.0" />
                                                          </font></Button>
@@ -407,15 +407,15 @@
                                                 </AnchorPane>
                                                 <AnchorPane layoutX="393.0" layoutY="12.0" prefHeight="591.0" prefWidth="713.0" styleClass="board" stylesheets="@adminDashboard.css">
                                                    <children>
-                                                      <TableView fx:id="med_table" layoutX="5.0" layoutY="45.0" prefHeight="540.0" prefWidth="704.0">
+                                                      <TableView fx:id="med_table" layoutX="5.0" layoutY="45.0" onMouseClicked="#selectMedicament" prefHeight="540.0" prefWidth="704.0">
                                                         <columns>
                                                           <TableColumn fx:id="nom_med_col" prefWidth="70.0" text="Nom" />
-                                                          <TableColumn fx:id="desc_med_col" prefWidth="96.0" text="Description" />
-                                                            <TableColumn fx:id="date_prod_med_col" prefWidth="119.0" text="Date de Production" />
-                                                            <TableColumn fx:id="date_exper_med_col" prefWidth="115.0" text="Date d'Experation" />
-                                                            <TableColumn fx:id="qte_med_col" prefWidth="69.0" text="Quantité" />
+                                                          <TableColumn fx:id="desc_med_col" prefWidth="131.0" text="Description" />
+                                                            <TableColumn fx:id="date_prod_med_col" prefWidth="95.0" text="Date de Production" />
+                                                            <TableColumn fx:id="date_exper_med_col" prefWidth="93.0" text="Date d'Experation" />
+                                                            <TableColumn fx:id="qte_med_col" text="Quantité" />
                                                             <TableColumn fx:id="prix_med_col" prefWidth="68.0" text="Prix" />
-                                                            <TableColumn fx:id="stock_id_med_col" prefWidth="65.0" text="Stock ID" />
+                                                            <TableColumn fx:id="stock_id_med_col" prefWidth="65.0" text="Stock Qte" />
                                                             <TableColumn fx:id="date_achat_med_col" prefWidth="106.0" text="Date d'Achat" />
                                                         </columns>
                                                       </TableView>
