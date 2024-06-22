@@ -76,8 +76,11 @@
 	-fx-border-width: 1px;
 	-fx-border-radius: 3px;
 }
+.shadow{
+	-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.5),6,0,0,0); 
+}
 .textfield:focused{
-	-fx-background-color:#fedfee;
+	-fx-background-color:#fefffe;
 	-fx-border-color: #000;
 	-fx-border-width: 1px;
 	-fx-border-radius: 4px;

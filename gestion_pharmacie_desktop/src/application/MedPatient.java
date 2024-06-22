@@ -30,9 +30,9 @@ public class MedPatient {
 		this.dateAchat=dateAchat;
 	}
 	
-	@Override
-	public String toString() {
-		return String.valueOf(dateAchat);
-	}
+	  @Override
+	    public String toString() {
+	        return "MedPatient [medPatientId=" + medPatientId + ", qteMedPatient=" + qteMedPatient + ", dateAchat=" + dateAchat + "]";
+	    }
 
 }

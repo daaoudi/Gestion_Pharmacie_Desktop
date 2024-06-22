@@ -15,8 +15,7 @@ public class Medicament {
     private MedPatient medPatient;
     private String stockId;
     private String medPatientId;
-    private int qteStock;
-    private Date dateAchat;
+   
 
     public String getMedPatientId() {
         return medPatientId;
@@ -30,9 +29,7 @@ public class Medicament {
         this.medPatientId = medPatientId;
     }
 
-    public void setQteStock(int qteStock) {
-        this.qteStock = qteStock;
-    }
+  
 
     public String getStockId() {
         return stockId;
@@ -46,9 +43,7 @@ public class Medicament {
         this.stockId = stockId;
     }
 
-    public void setDateAchat(Date dateAchat) {
-        this.dateAchat = dateAchat;
-    }
+ 
 
     public String getMedId() {
         return medId;
@@ -120,5 +115,12 @@ public class Medicament {
 
     public void setMedPatient(MedPatient medPatient) {
         this.medPatient = medPatient;
+    }
+    
+    @Override
+    public String toString() {
+    	return " Medicament =[ med Id :  "+ medId +" nom medicament : "+nomMed + "description : "
+    			+ description+"date prod : "+dateProdMed+" date Exper :"+dateExperMed + "qte Medicament : "+ qteMed +" prix : "+
+    					prix+ " stock id :"+stockId +" med patient ID :"+medPatientId + "]";
     }
 }

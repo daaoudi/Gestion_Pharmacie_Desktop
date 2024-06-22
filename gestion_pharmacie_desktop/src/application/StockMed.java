@@ -17,7 +17,7 @@ public class StockMed {
 	
 	@Override
     public String toString() {
-        return String.valueOf(qteStock); // Display qte in ComboBox
+        return "StockMed [stockId=" + stockId + ", qteStock=" + qteStock + "]";
     }
 
 
