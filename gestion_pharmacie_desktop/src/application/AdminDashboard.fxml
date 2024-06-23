@@ -65,35 +65,35 @@
                                           <Font name="Calibri Bold Italic" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="home_btn" layoutX="12.0" layoutY="259.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Home">
+                                    <Button fx:id="home_btn" layoutX="12.0" layoutY="240.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Home">
                                        <font>
                                           <Font name="Calisto MT Italic" size="14.0" />
                                        </font>
                                        <graphic>
                                           <FontAwesomeIcon fill="#f8f5f5" glyphName="HOME" size="1.7em" />
                                        </graphic></Button>
-                                    <Button fx:id="stock_btn" layoutX="10.0" layoutY="288.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Stock Medicament">
+                                    <Button fx:id="stock_btn" layoutX="10.0" layoutY="275.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Stock Medicament">
                                        <font>
                                           <Font name="Calisto MT Italic" size="14.0" />
                                        </font>
                                        <graphic>
                                           <FontAwesomeIcon fill="#fcfcfc" glyphName="DATABASE" size="1.7em" />
                                        </graphic></Button>
-                                    <Button fx:id="gestion_med_pat_btn" layoutX="10.0" layoutY="321.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Gestion_Med_Patient">
+                                    <Button fx:id="gestion_med_pat_btn" layoutX="10.0" layoutY="310.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Gestion_Med_Patient">
                                        <font>
                                           <Font name="Calisto MT Italic" size="14.0" />
                                        </font>
                                        <graphic>
                                           <FontAwesomeIcon fill="#fffdfd" glyphName="ARCHIVE" size="1.7em" />
                                        </graphic></Button>
-                                    <Button fx:id="medicament_btn" layoutX="11.0" layoutY="351.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Medicament">
+                                    <Button fx:id="medicament_btn" layoutX="11.0" layoutY="345.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Medicament">
                                        <font>
                                           <Font name="Calisto MT Italic" size="14.0" />
                                        </font>
                                        <graphic>
                                           <FontAwesomeIcon fill="#fffefe" glyphName="MEDKIT" size="1.7em" />
                                        </graphic></Button>
-                                    <Button fx:id="fournisseur_btn" layoutX="12.0" layoutY="378.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Fournisseur">
+                                    <Button fx:id="fournisseur_btn" layoutX="12.0" layoutY="375.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Fournisseur">
                                        <graphic>
                                           <FontAwesomeIcon fill="WHITE" glyphName="CHILD" size="1.7em" />
                                        </graphic></Button>
@@ -101,15 +101,15 @@
                                        <graphic>
                                           <FontAwesomeIcon fill="WHITE" glyphName="MONEY" size="1.7em" />
                                        </graphic></Button>
-                                    <Button fx:id="facture_btn" layoutX="12.0" layoutY="434.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Facture">
+                                    <Button fx:id="facture_btn" layoutX="12.0" layoutY="495.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Facture">
                                        <graphic>
                                           <FontAwesomeIcon fill="WHITE" glyphName="MONEY" size="1.7em" />
                                        </graphic></Button>
-                                    <Button fx:id="patient_btn" layoutX="13.0" layoutY="492.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Patient">
+                                    <Button fx:id="patient_btn" layoutX="12.0" layoutY="465.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Patient">
                                        <graphic>
                                           <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.7em" />
                                        </graphic></Button>
-                                    <Button fx:id="docteur_btn" layoutX="13.0" layoutY="463.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Docteur">
+                                    <Button fx:id="docteur_btn" layoutX="12.0" layoutY="435.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Docteur">
                                        <graphic>
                                           <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.7em" />
                                        </graphic></Button>
@@ -126,11 +126,11 @@
                                           <Font name="Calibri Bold Italic" size="14.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="users_btn" layoutX="13.0" layoutY="520.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Utilisateurs">
+                                    <Button fx:id="users_btn" layoutX="13.0" layoutY="525.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Utilisateurs">
                                        <graphic>
                                           <FontAwesomeIcon fill="#fffdfd" glyphName="USERS" size="1.7em" />
                                        </graphic></Button>
-                                    <Button fx:id="profile_btn" layoutX="13.0" layoutY="547.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Profile">
+                                    <Button fx:id="profile_btn" layoutX="13.0" layoutY="555.0" mnemonicParsing="false" onAction="#SwitchForm" prefHeight="30.0" prefWidth="185.0" styleClass="btn" stylesheets="@adminDashboard.css" text="Profile">
                                        <graphic>
                                           <FontAwesomeIcon fill="WHITE" glyphName="USER" size="1.7em" />
                                        </graphic></Button>
@@ -492,7 +492,7 @@
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="gestion_pat_facture_form" prefHeight="630.0" prefWidth="1134.0">
+                              <AnchorPane fx:id="gestion_pat_facture_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
                                  <children>
                                     <AnchorPane prefHeight="630.0" prefWidth="1134.0" styleClass="board" stylesheets="@adminDashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
@@ -507,17 +507,17 @@
                                                 <TextField fx:id="pat_facture_id" layoutX="124.0" layoutY="117.0" prefHeight="35.0" prefWidth="241.0" promptText="Patient Facture ID" styleClass="textfield" stylesheets="@adminDashboard.css" />
                                                 <Label layoutX="3.0" layoutY="193.0" text="Date de Transaction :" />
                                                 <DatePicker fx:id="date_transaction" layoutX="124.0" layoutY="179.0" prefHeight="35.0" prefWidth="241.0" promptText="MM-JJ-AAAA" />
-                                                <Button fx:id="pat_facture_btn_add" layoutX="193.0" layoutY="262.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="64.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfcfc">
+                                                <Button fx:id="pat_facture_btn_add" layoutX="193.0" layoutY="262.0" mnemonicParsing="false" onAction="#insertPatFacture" prefHeight="30.0" prefWidth="64.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfcfc">
                                                    <font>
                                                       <Font name="Calisto MT Bold" size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <Button fx:id="pat_facture_btn_update" layoutX="125.0" layoutY="335.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#f2f2f2">
+                                                <Button fx:id="pat_facture_btn_update" layoutX="125.0" layoutY="335.0" mnemonicParsing="false" onAction="#updatePatFacture" prefHeight="30.0" prefWidth="75.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#f2f2f2">
                                                    <font>
                                                       <Font name="Calisto MT Bold" size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <Button fx:id="pat_facture_btn_delete" layoutX="254.0" layoutY="335.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="86.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#fcf9f9">
+                                                <Button fx:id="pat_facture_btn_delete" layoutX="254.0" layoutY="335.0" mnemonicParsing="false" onAction="#deletePatFacture" prefHeight="30.0" prefWidth="86.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#fcf9f9">
                                                    <font>
                                                       <Font name="Calisto MT Bold" size="14.0" />
                                                    </font>
@@ -526,7 +526,7 @@
                                           </AnchorPane>
                                           <AnchorPane layoutX="431.0" layoutY="11.0" prefHeight="615.0" prefWidth="697.0" styleClass="board" stylesheets="@adminDashboard.css">
                                              <children>
-                                                <TableView fx:id="pat_facture_table_view" layoutX="8.0" layoutY="7.0" prefHeight="602.0" prefWidth="681.0">
+                                                <TableView fx:id="pat_facture_table_view" layoutX="8.0" layoutY="7.0" onMouseClicked="#selectPatFacture" prefHeight="602.0" prefWidth="681.0">
                                                   <columns>
                                                     <TableColumn fx:id="pat_facture_id_col" prefWidth="242.0" text="Pat_Facture ID" />
                                                     <TableColumn fx:id="date_transaction_col" prefWidth="437.0" text="Date de Transaction" />
@@ -560,7 +560,7 @@
                                                       <Font name="Calisto MT" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="date_trans_id_comboBox" layoutX="124.0" layoutY="177.0" prefHeight="39.0" prefWidth="246.0" />
+                                                <ComboBox fx:id="date_trans_id_comboBox" layoutX="124.0" layoutY="177.0" prefHeight="39.0" prefWidth="246.0" promptText="Choisir date de Transaction" />
                                                 <Button fx:id="facture_btn_add" layoutX="214.0" layoutY="253.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfcfc">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
@@ -596,7 +596,7 @@
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="docteur_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                              <AnchorPane fx:id="docteur_form" prefHeight="630.0" prefWidth="1134.0">
                                  <children>
                                     <AnchorPane layoutX="106.0" layoutY="78.0" prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
@@ -652,7 +652,7 @@
                                                       <Font name="Calisto MT Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="docteur_specialite_comboBox" layoutX="131.0" layoutY="315.0" prefHeight="35.0" prefWidth="231.0" />
+                                                <ComboBox fx:id="docteur_specialite_comboBox" layoutX="131.0" layoutY="315.0" prefHeight="35.0" prefWidth="231.0" promptText="Choisir spécialité" />
                                                 <Button fx:id="docteur_btn_add" layoutX="196.0" layoutY="391.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#f8f6f6">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
@@ -727,19 +727,19 @@
                                                       <Font name="Calisto MT Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="patient_docteur_comboBox" layoutX="112.0" layoutY="329.0" prefHeight="35.0" prefWidth="253.0" />
+                                                <ComboBox fx:id="patient_docteur_comboBox" layoutX="112.0" layoutY="329.0" prefHeight="35.0" prefWidth="253.0" promptText="Choisir docteur" />
                                                 <Label layoutX="3.0" layoutY="382.0" text="Date d'Achat Med :">
                                                    <font>
                                                       <Font name="Calisto MT Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="patient_med_date_achat_comboBox" layoutX="112.0" layoutY="373.0" prefHeight="35.0" prefWidth="253.0" />
+                                                <ComboBox fx:id="patient_med_date_achat_comboBox" layoutX="112.0" layoutY="373.0" prefHeight="35.0" prefWidth="253.0" promptText="Date achat Médicament" />
                                                 <Label layoutX="3.0" layoutY="430.0" text="Date d'Trans Fact :">
                                                    <font>
                                                       <Font name="Calisto MT Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="patient_fact_date_trans_comboBox" layoutX="112.0" layoutY="421.0" prefHeight="35.0" prefWidth="253.0" />
+                                                <ComboBox fx:id="patient_fact_date_trans_comboBox" layoutX="112.0" layoutY="421.0" prefHeight="35.0" prefWidth="253.0" promptText="Date de Transaction Facture" />
                                                 <Button fx:id="patient_btn_add" layoutX="204.0" layoutY="485.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfafa">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />

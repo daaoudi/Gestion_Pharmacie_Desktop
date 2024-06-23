@@ -96,7 +96,7 @@ public class AdminDashboardController implements Initializable {
 	    private DatePicker date_transaction;
 
 	    @FXML
-	    private TableColumn<?, ?> date_transaction_col;
+	    private TableColumn<PatFacture, Date> date_transaction_col;
 
 	    @FXML
 	    private Button delete_stock_btn;
@@ -126,7 +126,7 @@ public class AdminDashboardController implements Initializable {
 	    private TextField docteur_id;
 
 	    @FXML
-	    private TableColumn<?, ?> docteur_id_col;
+	    private TableColumn<Docteur, String> docteur_id_col;
 
 	    @FXML
 	    private Label docteur_nbr;
@@ -135,28 +135,28 @@ public class AdminDashboardController implements Initializable {
 	    private TextField docteur_nom;
 
 	    @FXML
-	    private TableColumn<?, ?> docteur_nom_col;
+	    private TableColumn<Docteur, String> docteur_nom_col;
 
 	    @FXML
 	    private TextField docteur_prenom;
 
 	    @FXML
-	    private TableColumn<?, ?> docteur_prenom_col;
+	    private TableColumn<Docteur, String> docteur_prenom_col;
 
 	    @FXML
-	    private TableColumn<?, ?> docteur_specialite_col;
+	    private TableColumn<Docteur, String> docteur_specialite_col;
 
 	    @FXML
 	    private ComboBox<?> docteur_specialite_comboBox;
 
 	    @FXML
-	    private TableView<?> docteur_table;
+	    private TableView<Docteur> docteur_table;
 
 	    @FXML
 	    private TextField docteur_tel;
 
 	    @FXML
-	    private TableColumn<?, ?> docteur_tel_col;
+	    private TableColumn<Docteur, String> docteur_tel_col;
 
 	    @FXML
 	    private TextField email_profile;
@@ -357,10 +357,10 @@ public class AdminDashboardController implements Initializable {
 	    private TextField pat_facture_id;
 
 	    @FXML
-	    private TableColumn<?, ?> pat_facture_id_col;
+	    private TableColumn<PatFacture, String> pat_facture_id_col;
 
 	    @FXML
-	    private TableView<?> pat_facture_table_view;
+	    private TableView<PatFacture> pat_facture_table_view;
 
 	    @FXML
 	    private TextField patient_adresse;
@@ -696,6 +696,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		showListPatFacture();
 	    	}else if(event.getSource()==facture_btn) {
 	    		facture_form.setVisible(true);
 	    		docteur_form.setVisible(false);
@@ -1868,7 +1869,232 @@ public ObservableList<Medicament> listDataMedicament() {
 	    	fournisseur_stock_id.getSelectionModel().getSelectedItem();
 	    	
 	    }
+	    /* Gestion Patient Facture */
+	    
+	 public ObservableList<PatFacture> showPatFacture(){
+		 ObservableList<PatFacture> listData=FXCollections.observableArrayList();
+		 String sql=" SELECT * FROM gestion_pat_facture ";
+		 
+		 try {
+			 conn=DatabaseConnection.getConnection();
+			 pst = conn.prepareStatement(sql);
+		        rs = pst.executeQuery();
+		        while(rs.next()) {
+		        	PatFacture patFacture=new PatFacture();
+		        	patFacture.setPatFactureId(rs.getString("pat_facture_id"));
+		        	patFacture.setDateTransaction(rs.getDate("date_transaction"));
+		        	
+		        	listData.add(patFacture);
+		        }
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 return listData;
+	 }
+	 private ObservableList<PatFacture> listPatFacture;
+	 public void showListPatFacture() {
+		 listPatFacture=showPatFacture();
+		 pat_facture_id_col.setCellValueFactory(new PropertyValueFactory<>("patFactureId"));
+		 date_transaction_col.setCellValueFactory(new PropertyValueFactory<>("dateTransaction"));
+		 pat_facture_table_view.setItems(listPatFacture);
+	 }
+	 
+	 public void selectPatFacture() {
+		 PatFacture patFacture=pat_facture_table_view.getSelectionModel().getSelectedItem();
+		 int num=pat_facture_table_view.getSelectionModel().getSelectedIndex();
+		 if(num-1<-1) {
+			 return;
+		 }
+		 pat_facture_id.setText(patFacture.getPatFactureId());
+		 date_transaction.setValue(patFacture.getDateTransaction().toLocalDate());
+	 }
 
+	 public void insertPatFacture() {
+		 String sql="INSERT INTO gestion_pat_facture (pat_facture_id,date_transaction)  VALUES (?,?)";
+		 try {
+			 Alert alert;
+			 if(pat_facture_id.getText().isEmpty() 
+					 || date_transaction.getValue()==null) {
+				 alert=new Alert(AlertType.ERROR);
+	    			alert.setTitle("Message d'erreur !!");
+	    			alert.setHeaderText(null);
+	    			alert.setContentText("s'il vous plait remplir tous les champs !");
+	    			alert.showAndWait();
+			 }else {
+				 conn=DatabaseConnection.getConnection();
+				 String check=" SELECT * FROM gestion_pat_facture WHERE pat_facture_id = ' "+pat_facture_id.getText() + " ' ";
+					statement=conn.createStatement();
+					rs=statement.executeQuery(check);
+					if(rs.next()) {
+						alert=new Alert(AlertType.ERROR);
+						alert.setTitle("Message d'erreur !!");
+		    			alert.setHeaderText(null);
+		    			alert.setContentText(" Patient Facture ID : "+pat_facture_id.getText() + "déja exist dans la base de données !!");
+		    			alert.showAndWait();
+					}else {
+						pst=conn.prepareStatement(sql);
+						pst.setString(1, pat_facture_id.getText());
+						pst.setDate(2,Date.valueOf(date_transaction.getValue()) );
+						pst.executeUpdate();
+	    				
+	    				alert=new Alert(AlertType.INFORMATION);
+	    				alert.setTitle("Message d'information !");
+	    				alert.setHeaderText(null);
+	    				alert.setContentText(" Patient Facture Ajouté avec succés !✔  ");
+	    				alert.showAndWait();
+	    				showListPatFacture();
+	    				resetPatFacture();
+					}
+			 }
+			 
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 
+	 public void updatePatFacture() {
+		    String sql = "UPDATE gestion_pat_facture SET date_transaction = ? WHERE pat_facture_id = ?";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+		        String patFactureId = pat_facture_id.getText();
+
+		        if (pat_facture_id.getText().isEmpty() || date_transaction.getValue() == null) {
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez remplir tous les champs !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Vous êtes sûr de vouloir mettre à jour cet élément avec cet ID ? : " + patFactureId + " ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                pst.setDate(1, Date.valueOf(date_transaction.getValue()));
+		                pst.setString(2, patFactureId);
+
+		                int rowsUpdated = pst.executeUpdate();
+		                if (rowsUpdated > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Mise à jour réussie ✔ !");
+		                    alert.showAndWait();
+		                    showListPatFacture();
+		                    resetPatFacture();
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun élément trouvé avec cet ID.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la mise à jour de l'élément : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+
+	 public void deletePatFacture() {
+		    String sql = "DELETE FROM gestion_pat_facture WHERE pat_facture_id = ?";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+		        String patFactureId = pat_facture_id.getText();
+
+		        if (pat_facture_id.getText().isEmpty() || date_transaction.getValue() == null) {
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez cliquer sur l'élément que vous voulez supprimer !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Vous êtes sûr de vouloir supprimer cet élément avec cet ID ? : " + patFactureId + " ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                pst.setString(1, patFactureId);
+
+		                int rowsDeleted = pst.executeUpdate();
+		                if (rowsDeleted > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Suppression réussie ✔ !");
+		                    alert.showAndWait();
+		                    showListPatFacture();
+		                    resetPatFacture();
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun élément trouvé avec cet ID.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la suppression de l'élément : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+
+	 
+	 public void resetPatFacture() {
+		 pat_facture_id.setText("");
+		 date_transaction.setValue(null);
+	 }
+	 /* docteur */
+	 
+	 public ObservableList<Docteur> showDocteur(){
+		 ObservableList<Docteur> listData=FXCollections.observableArrayList();
+		 String sql="SELECT * FROM docteur ";
+		 try {
+			 conn=DatabaseConnection.getConnection();
+			 pst = conn.prepareStatement(sql);
+		        rs = pst.executeQuery();
+		        while(rs.next()) {
+		        	Docteur docteur = new Docteur();
+		        	docteur.setDocteurId(rs.getString("docteur_id"));
+		        	docteur.setNomDoc(rs.getString("nom_doc"));
+		        	docteur.setPrenomDoc(rs.getString("prenom_doc"));
+		        	docteur.setTelDoc(rs.getString("tel_doc"));
+		        	docteur.setSpecialite(rs.getString("specialite"));
+		        	
+		        	listData.add(docteur);
+		        }
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 
+		 return listData;
+	 }
+	 private ObservableList<Docteur> listDocteur;
+	 public void showListDocter() {
+		 listDocteur=showDocteur();
+		 docteur_id_col.setCellValueFactory(new PropertyValueFactory<>("docteurId"));
+		 docteur_nom_col.setCellValueFactory(new PropertyValueFactory<>("nomDoc"));
+		 docteur_prenom_col.setCellValueFactory(new PropertyValueFactory<>("prenomDoc"));
+		 docteur_tel_col.setCellValueFactory(new PropertyValueFactory<>("telDoc"));
+		 docteur_specialite_col.setCellValueFactory(new PropertyValueFactory<>("specialite"));
+		 docteur_table.setItems(listDocteur);
+	 }
 	    private double x=0;
 	    private double y=0;
 	    public void logout() {
@@ -1982,7 +2208,8 @@ public ObservableList<Medicament> listDataMedicament() {
 		 showListDataStockMed();
 		 showListDataMedPatient();
 		 showListFournisseur();
-		
+		 showListPatFacture();
+		 
 		    getStockItems();
 		    getMedPatientItems();
 		    date_achat_med_pat_comboBox.setItems(medPatientItems);
