@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -43,6 +45,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.SimpleObjectProperty;
 
 public class AdminDashboardController implements Initializable {
 	private Connection conn;
@@ -90,7 +94,7 @@ public class AdminDashboardController implements Initializable {
 	    private TableColumn<Medicament, Date> date_prod_med_col;
 
 	    @FXML
-	    private ComboBox<?> date_trans_id_comboBox;
+	    private ComboBox<PatFacture> date_trans_id_comboBox;
 
 	    @FXML
 	    private DatePicker date_transaction;
@@ -147,7 +151,7 @@ public class AdminDashboardController implements Initializable {
 	    private TableColumn<Docteur, String> docteur_specialite_col;
 
 	    @FXML
-	    private ComboBox<?> docteur_specialite_comboBox;
+	    private ComboBox<String> docteur_specialite_comboBox;
 
 	    @FXML
 	    private TableView<Docteur> docteur_table;
@@ -180,7 +184,7 @@ public class AdminDashboardController implements Initializable {
 	    private Button facture_btn_update;
 
 	    @FXML
-	    private TableColumn<?, ?> facture_date_trans_col;
+	    private TableColumn<Facture, Date> facture_date_trans_col;
 
 	    @FXML
 	    private AnchorPane facture_form;
@@ -189,22 +193,22 @@ public class AdminDashboardController implements Initializable {
 	    private TextField facture_id;
 
 	    @FXML
-	    private TableColumn<?, ?> facture_id_col;
+	    private TableColumn<Facture, String> facture_id_col;
 
 	    @FXML
-	    private TableColumn<?, ?> facture_med_col;
+	    private TableColumn<Facture, String> facture_med_col;
 
 	    @FXML
-	    private TableColumn<?, ?> facture_pat_col;
+	    private TableColumn<Facture, String> facture_pat_col;
 
 	    @FXML
-	    private TableColumn<?, ?> facture_qte_col;
+	    private TableColumn<Facture, Integer> facture_qte_col;
 
 	    @FXML
-	    private TableView<?> facture_table;
+	    private TableView<Facture> facture_table;
 
 	    @FXML
-	    private TableColumn<?, ?> facture_total_col;
+	    private TableColumn<Facture, Double> facture_total_col;
 
 	    @FXML
 	    private Button fournisseur_btn;
@@ -366,7 +370,7 @@ public class AdminDashboardController implements Initializable {
 	    private TextField patient_adresse;
 
 	    @FXML
-	    private TableColumn<?, ?> patient_adresse_col;
+	    private TableColumn<Patient, String> patient_adresse_col;
 
 	    @FXML
 	    private Button patient_btn;
@@ -384,16 +388,16 @@ public class AdminDashboardController implements Initializable {
 	    private BarChart<?, ?> patient_data_chart;
 
 	    @FXML
-	    private TableColumn<?, ?> patient_docteur_col;
+	    private TableColumn<Patient, String> patient_docteur_col;
 
 	    @FXML
-	    private ComboBox<?> patient_docteur_comboBox;
+	    private ComboBox<Docteur> patient_docteur_comboBox;
 
 	    @FXML
-	    private TableColumn<?, ?> patient_fact_date_trans_col;
+	    private TableColumn<Patient, Date> patient_fact_date_trans_col;
 
 	    @FXML
-	    private ComboBox<?> patient_fact_date_trans_comboBox;
+	    private ComboBox<PatFacture> patient_fact_date_trans_comboBox;
 
 	    @FXML
 	    private AnchorPane patient_form;
@@ -402,10 +406,10 @@ public class AdminDashboardController implements Initializable {
 	    private TextField patient_id;
 
 	    @FXML
-	    private TableColumn<?, ?> patient_med_date_achat_col;
+	    private TableColumn<Patient, Date> patient_med_date_achat_col;
 
 	    @FXML
-	    private ComboBox<?> patient_med_date_achat_comboBox;
+	    private ComboBox<MedPatient> patient_med_date_achat_comboBox;
 
 	    @FXML
 	    private Label patient_nbr;
@@ -414,22 +418,22 @@ public class AdminDashboardController implements Initializable {
 	    private TextField patient_nom;
 
 	    @FXML
-	    private TableColumn<?, ?> patient_nom_col;
+	    private TableColumn<Patient, String> patient_nom_col;
 
 	    @FXML
 	    private TextField patient_prenom;
 
 	    @FXML
-	    private TableColumn<?, ?> patient_prenom_col;
+	    private TableColumn<Patient, String> patient_prenom_col;
 
 	    @FXML
-	    private TableView<?> patient_table;
+	    private TableView< Patient> patient_table;
 
 	    @FXML
 	    private TextField patient_tel;
 
 	    @FXML
-	    private TableColumn<?, ?> patient_tel_col;
+	    private TableColumn<Patient, String> patient_tel_col;
 
 	    @FXML
 	    private TextField prenom_profile;
@@ -642,8 +646,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		showListDataMedicament();
-	    		getStockItems();
-			    getMedPatientItems();
+	    		
 	    	}else if(event.getSource()==fournisseur_btn) {
 	    		fournisseur_form.setVisible(true);
 	    		gestion_pat_facture_form.setVisible(false);
@@ -669,7 +672,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		
 	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		getStockItems();
+	    		
 	    		showListFournisseur();
 	    	}else if(event.getSource()==gestion_pat_fact_btn) {
 	    		gestion_pat_facture_form.setVisible(true);
@@ -722,6 +725,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		showListFacture();
 	    	}else if(event.getSource()==docteur_btn) {
 	    		docteur_form.setVisible(true);
 	    		patient_form.setVisible(false);
@@ -747,6 +751,8 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		 showListDocteur();
+	    		 getListSpecialite();
 	    	}else if(event.getSource()==patient_btn) {
 	    		patient_form.setVisible(true);
 	    		users_form.setVisible(false);
@@ -772,6 +778,8 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		showListPatient();
+	    		
 	    	}else if (event.getSource()==users_btn) {
 	    		users_form.setVisible(true);
 	    		profile_form.setVisible(false);
@@ -1240,7 +1248,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	
 	public void getStockItems() {
 	
-	    String sql = "SELECT DISTINCT * FROM stock_med";
+	    String sql = "SELECT  * FROM stock_med";
 	    try {
 	    	
 	        conn = DatabaseConnection.getConnection();
@@ -1252,7 +1260,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	            stockMed.setQteStock(rs.getInt("qte_stock"));
 	            stockItems.add(stockMed);
 	        }
-	  System.out.println("the stock items :"+ stockItems.size());
+	  
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
@@ -1261,7 +1269,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	  private  ObservableList<MedPatient> medPatientItems=FXCollections.observableArrayList();
 	  public void getMedPatientItems() {
 		
-		    String sql = "SELECT DISTINCT * FROM gestion_med_patient";
+		    String sql = "SELECT  * FROM gestion_med_patient";
 		    try {
 		        conn = DatabaseConnection.getConnection();
 		        pst = conn.prepareStatement(sql);
@@ -1269,10 +1277,11 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 		        while (rs.next()) {
 		            MedPatient medPatient = new MedPatient();
 		            medPatient.setMedPatientId(rs.getString("med_patient_id"));
+		            medPatient.setQteMedPatient(rs.getInt("qte_med_patient"));
 		            medPatient.setDateAchat(rs.getDate("date_achat"));
 		            medPatientItems.add(medPatient);
 		        }
-		       System.out.println("med patient items : "+ medPatientItems.size());
+		    
 		    } catch (Exception e) {
 		        e.printStackTrace();
 		    }
@@ -2086,7 +2095,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		 return listData;
 	 }
 	 private ObservableList<Docteur> listDocteur;
-	 public void showListDocter() {
+	 public void showListDocteur() {
 		 listDocteur=showDocteur();
 		 docteur_id_col.setCellValueFactory(new PropertyValueFactory<>("docteurId"));
 		 docteur_nom_col.setCellValueFactory(new PropertyValueFactory<>("nomDoc"));
@@ -2095,6 +2104,793 @@ public ObservableList<Medicament> listDataMedicament() {
 		 docteur_specialite_col.setCellValueFactory(new PropertyValueFactory<>("specialite"));
 		 docteur_table.setItems(listDocteur);
 	 }
+	 public void selectDocteur() {
+		 Docteur docteur=docteur_table.getSelectionModel().getSelectedItem();
+		 int num=docteur_table.getSelectionModel().getSelectedIndex();
+		 if(num-1<-1) {
+			 return;
+		 }
+		 docteur_id.setText(docteur.getDocteurId());
+		 docteur_nom.setText(docteur.getNomDoc());
+		 docteur_prenom.setText(docteur.getPrenomDoc());
+		 docteur_tel.setText(docteur.getTelDoc());
+	 }
+	 public void insertDocteur() {
+		    String sql = "INSERT INTO docteur (docteur_id, nom_doc, prenom_doc, tel_doc, specialite) VALUES (?,?,?,?,?)";
+		    try {
+		        Alert alert;
+		        if (docteur_id.getText().isEmpty() ||
+		            docteur_nom.getText().isEmpty() ||
+		            docteur_prenom.getText().isEmpty() ||
+		            docteur_tel.getText().isEmpty() ||
+		            docteur_specialite_comboBox.getSelectionModel().getSelectedItem() == null) {
+
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("s'il vous plait remplir tous les champs !");
+		            alert.showAndWait();
+		        } else {
+		            conn = DatabaseConnection.getConnection();
+		            String check = "SELECT * FROM docteur WHERE docteur_id= ?";
+		            pst = conn.prepareStatement(check);
+		            pst.setString(1, docteur_id.getText());
+		            rs = pst.executeQuery();
+
+		            if (rs.next()) {
+		                alert = new Alert(Alert.AlertType.ERROR);
+		                alert.setTitle("Message d'erreur !!");
+		                alert.setHeaderText(null);
+		                alert.setContentText("Docteur ID : " + docteur_id.getText() + " déja exist dans la base de données !!");
+		                alert.showAndWait();
+		            } else {
+		                pst = conn.prepareStatement(sql);
+		                pst.setString(1, docteur_id.getText());
+		                pst.setString(2, docteur_nom.getText());
+		                pst.setString(3, docteur_prenom.getText());
+		                pst.setString(4, docteur_tel.getText());
+		                pst.setString(5, docteur_specialite_comboBox.getSelectionModel().getSelectedItem());
+		                pst.executeUpdate();
+
+		                alert = new Alert(Alert.AlertType.INFORMATION);
+		                alert.setTitle("Message d'information !");
+		                alert.setHeaderText(null);
+		                alert.setContentText("Docteur Ajouté avec succés !✔");
+		                alert.showAndWait();
+		                showListDocteur();
+		                resetDocteur();
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+	 
+	 public void updateDocteur() {
+		    String sql = "UPDATE docteur SET nom_doc=?, prenom_doc=?, tel_doc=?, specialite=? WHERE docteur_id=?";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+		        String docteurId = docteur_id.getText();
+
+		        if (docteur_id.getText().isEmpty() ||
+		            docteur_nom.getText().isEmpty() ||
+		            docteur_prenom.getText().isEmpty() ||
+		            docteur_tel.getText().isEmpty() ||
+		            docteur_specialite_comboBox.getSelectionModel().getSelectedItem() == null) {
+
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez remplir tous les champs !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Vous êtes sûr de vouloir mettre à jour cet élément avec cet ID ? : " + docteurId + " ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                pst.setString(1, docteur_nom.getText());
+		                pst.setString(2, docteur_prenom.getText());
+		                pst.setString(3, docteur_tel.getText());
+		                pst.setString(4, docteur_specialite_comboBox.getSelectionModel().getSelectedItem());
+		                pst.setString(5, docteurId);
+
+		                int rowsUpdated = pst.executeUpdate();
+		                if (rowsUpdated > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Mise à jour réussie ✔ !");
+		                    alert.showAndWait();
+		                    showListDocteur();
+		                    resetDocteur();
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun élément trouvé avec cet ID.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la mise à jour de l'élément : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+
+	 public void deleteDocteur() {
+		    String sql = "DELETE FROM docteur WHERE docteur_id=?";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+		        String docteurId = docteur_id.getText();
+
+		        if (docteur_id.getText().isEmpty()) {
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez cliquer sur l'élément que vous voulez supprimer !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Vous êtes sûr de vouloir supprimer cet élément avec cet ID ? : " + docteurId + " ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                pst.setString(1, docteurId);
+
+		                int rowsDeleted = pst.executeUpdate();
+		                if (rowsDeleted > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Suppression réussie ✔ !");
+		                    alert.showAndWait();
+		                    showListDocteur();
+		                    resetDocteur();
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun élément trouvé avec cet ID.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la suppression de l'élément : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+
+	
+
+
+	 public void resetDocteur() {
+		 docteur_id.setText("");
+		 docteur_nom.setText("");
+		 docteur_prenom.setText("");
+		 docteur_tel.setText("");
+		 docteur_specialite_comboBox.getSelectionModel().clearSelection();
+	 }
+	 private String[] listSpecialite= { "anesthésiologie", 
+			 "cardiologie", "dermatologie", "endocrinologie", "gastro-entérologie", "génétique médicale", "gériatrie",
+			 "hématologie", "immunologie clinique et allergie", "médecine interne", "médecine d'urgence", 
+			 "néphrologie", "neurologie", "oncologie médicale", "pédiatrie, physiatrie", "pneumologie", "psychiatrie", "rhumatologie" };
+	 public void getListSpecialite() {
+		    List<String> listG = new ArrayList<>(Arrays.asList(listSpecialite));
+		    ObservableList<String> listData = FXCollections.observableArrayList(listG);
+		    docteur_specialite_comboBox.setItems(listData);
+		}
+
+	 /* Patient */
+	 public ObservableList<Patient> showPatient(){
+		 ObservableList<Patient> listData=FXCollections.observableArrayList();
+		 String sql="SELECT * FROM patient p,docteur d,gestion_med_patient m,gestion_pat_facture f WHERE "
+		 		+ "p.docteur_id=d.docteur_id AND p.med_patient_id=m.med_patient_id AND p.pat_facture_id=f.pat_facture_id ";
+		 try {
+			 conn=DatabaseConnection.getConnection();
+			 pst = conn.prepareStatement(sql);
+		        rs = pst.executeQuery();
+		        while(rs.next()) {
+		        	Patient patient=new Patient();
+		        	patient.setPatientId(rs.getString("patient_id"));
+		        	patient.setNomPat(rs.getString("nom_pat"));
+		        	patient.setPrenomPat(rs.getString("prenom_pat"));
+		        	patient.setTelPat(rs.getString("tel_pat"));
+		        	patient.setAdressePat(rs.getString("adresse_pat"));
+		        	patient.setDocteurId(rs.getString("docteur_id"));
+		        	patient.setMedPatientId(rs.getString("med_patient_id"));
+		        	patient.setPatFactureId(rs.getString("pat_facture_id"));
+		        	
+		        	Docteur docteur=new Docteur();
+		        	docteur.setDocteurId(rs.getString("docteur_id"));
+		        	docteur.setNomDoc(rs.getString("nom_doc"));
+		        	docteur.setPrenomDoc(rs.getString("prenom_doc"));
+		        	patient.setDocteur(docteur);
+		        	
+		        	MedPatient medPatient = new MedPatient();
+		        	medPatient.setMedPatientId(rs.getString("med_patient_id"));
+		        	medPatient.setDateAchat(rs.getDate("date_achat"));
+		        	patient.setMedPatient(medPatient);
+		        	
+		        	PatFacture patFacture=new PatFacture();
+		        	patFacture.setPatFactureId(rs.getString("pat_facture_id"));
+		        	patFacture.setDateTransaction(rs.getDate("date_transaction"));
+		        	patient.setPatFacture(patFacture);
+		        	
+		        	listData.add(patient);
+		        	
+		        }
+			 
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+		 return listData;
+	 }
+	 
+	 private ObservableList<Patient> listPatient;
+	 public void showListPatient() {
+		    listPatient = showPatient();
+		    patient_nom_col.setCellValueFactory(new PropertyValueFactory<>("nomPat"));
+		    patient_prenom_col.setCellValueFactory(new PropertyValueFactory<>("prenomPat"));
+		    patient_tel_col.setCellValueFactory(new PropertyValueFactory<>("telPat"));
+		    patient_adresse_col.setCellValueFactory(new PropertyValueFactory<>("adressePat"));
+
+		  
+		    patient_docteur_col.setCellValueFactory(cellData -> {
+		        Patient patient = cellData.getValue();
+		        String fullName = patient.getDocteur().getNomDoc() + " " + patient.getDocteur().getPrenomDoc();
+		        return new SimpleStringProperty(fullName);
+		    });
+
+		    patient_med_date_achat_col.setCellValueFactory(cellData -> {
+		        Patient patient = cellData.getValue();
+		        Date dateAchat = patient.getMedPatient().getDateAchat();
+		        return new SimpleObjectProperty<>(dateAchat);
+		    });
+
+		    patient_fact_date_trans_col.setCellValueFactory(cellData -> {
+		        Patient patient = cellData.getValue();
+		        Date dateTransaction = patient.getPatFacture().getDateTransaction();
+		        return new SimpleObjectProperty<>(dateTransaction);
+		    });
+
+		    patient_table.setItems(listPatient);
+		}
+	 
+	 public void selectPatient() {
+		 Patient patient=patient_table.getSelectionModel().getSelectedItem();
+		 int num=patient_table.getSelectionModel().getSelectedIndex();
+		 if(num-1<-1) {
+			 return;
+		 }
+		 patient_id.setText(patient.getPatientId());
+		 patient_nom.setText(patient.getNomPat());
+		 patient_prenom.setText(patient.getPrenomPat());
+		 patient_tel.setText(patient.getTelPat());
+		 patient_adresse.setText(patient.getAdressePat());
+	 }
+	 private ObservableList<Docteur> ItemsDocteur=FXCollections.observableArrayList();
+	 public void getDocteurItems() {
+		 String sql="SELECT * FROM docteur ";
+		 try {
+			 conn=DatabaseConnection.getConnection();
+			   pst = conn.prepareStatement(sql);
+		        rs = pst.executeQuery();
+		        while(rs.next()) {
+		        	Docteur docteur=new Docteur();
+		        	docteur.setDocteurId(rs.getString("docteur_id"));
+		        	docteur.setNomDoc(rs.getString("nom_doc"));
+		        	docteur.setPrenomDoc(rs.getString("prenom_doc"));
+		        	ItemsDocteur.add(docteur);
+		        }
+			 
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 private ObservableList<PatFacture> patFactureItems=FXCollections.observableArrayList();
+	 public void getPatFactureItems() {
+		 String sql="SELECT * FROM gestion_pat_facture ";
+		 try {
+			 conn=DatabaseConnection.getConnection();
+			   pst = conn.prepareStatement(sql);
+		        rs = pst.executeQuery();
+		        while(rs.next()) {
+		        	PatFacture patFacture=new PatFacture();
+		        	patFacture.setPatFactureId(rs.getString("pat_facture_id"));
+		        	patFacture.setDateTransaction(rs.getDate("date_transaction"));
+		        	patFactureItems.add(patFacture);
+		        }
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 @FXML
+	 void selectDocteurComboBox() {
+		 patient_docteur_comboBox.getSelectionModel().getSelectedItem();
+	 }
+	 @FXML
+	 void selectMedPatientComboBox() {
+		 patient_med_date_achat_comboBox.getSelectionModel().getSelectedItem();
+	 }
+	 @FXML
+	 void selectPatFactureComboBoc() {
+		 patient_fact_date_trans_comboBox.getSelectionModel().getSelectedItem();
+	 }
+	 public void insertPatient() {
+		 String sql="INSERT INTO patient (patient_id,nom_pat,prenom_pat,tel_pat,adresse_pat,docteur_id,med_patient_id,pat_facture_id)"
+		 		+ "VALUES (?,?,?,?,?,?,?,?)";
+		 try {
+			 Alert alert;
+			 if(patient_id.getText().isEmpty()
+					 || patient_nom.getText().isEmpty()
+					 || patient_prenom.getText().isEmpty()
+					 || patient_tel.getText().isEmpty()
+					 || patient_adresse.getText().isEmpty()
+					 || patient_docteur_comboBox.getSelectionModel().getSelectedItem()==null
+					 || patient_med_date_achat_comboBox.getSelectionModel().getSelectedItem()==null
+					 || patient_fact_date_trans_comboBox.getSelectionModel().getSelectedItem()==null) {
+				 	alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("s'il vous plait remplir tous les champs !");
+		            alert.showAndWait();
+			 }else {
+				 conn=DatabaseConnection.getConnection();
+				 String check="SELECT * FROM patient WHERE patient_id=' "+patient_id.getText() + " ' ";
+				 statement=conn.createStatement();
+	    			rs=statement.executeQuery(check);
+	    			if(rs.next()) {
+	    				alert=new Alert(AlertType.ERROR);
+						alert.setTitle("Message d'erreur !!");
+		    			alert.setHeaderText(null);
+		    			alert.setContentText(" Patient Facture ID : "+patient_id.getText() + "déja exist dans la base de données !!");
+		    			alert.showAndWait();
+	    			}else {
+	    				pst=conn.prepareStatement(sql);
+	    				pst.setString(1, patient_id.getText());
+	    				pst.setString(2,patient_nom.getText());
+	    				pst.setString(3, patient_prenom.getText());
+	    				pst.setString(4, patient_tel.getText());
+	    				pst.setString(5, patient_adresse.getText());
+	    				Docteur selectedItem=patient_docteur_comboBox.getSelectionModel().getSelectedItem();
+	    				if(selectedItem!=null) {
+	    					String docteurId=selectedItem.getDocteurId();
+	    					pst.setString(6, docteurId);
+	    				}
+	    				MedPatient medPatient=patient_med_date_achat_comboBox.getSelectionModel().getSelectedItem();
+	    				if(medPatient!=null) {
+	    					String medPatientId=medPatient.getMedPatientId();
+	    					pst.setString(7, medPatientId);
+	    				}
+	    				PatFacture patFacture=patient_fact_date_trans_comboBox.getSelectionModel().getSelectedItem();
+	    				if(patFacture!=null) {
+	    					String patFactureId=patFacture.getPatFactureId();
+	    					pst.setString(8, patFactureId);
+	    				}
+	    				pst.executeUpdate();
+	    				
+	    				alert=new Alert(AlertType.INFORMATION);
+	    				alert.setTitle("Message d'information !");
+	    				alert.setHeaderText(null);
+	    				alert.setContentText(" Patient  Ajouté avec succés !✔  ");
+	    				alert.showAndWait();
+	    				showListPatient();
+	    				resetPatient();
+	    			}
+			 }
+			 
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 public void resetPatient() {
+		 patient_id.setText("");
+		 patient_nom.setText("");
+		 patient_prenom.setText("");
+		 patient_tel.setText("");
+		 patient_adresse.setText("");
+		 patient_docteur_comboBox.getSelectionModel().clearSelection();
+		 patient_med_date_achat_comboBox.getSelectionModel().clearSelection();
+		 patient_fact_date_trans_comboBox.getSelectionModel().clearSelection();
+		 }
+	 
+	 public void updatePatient() {
+		    String sql = "UPDATE patient SET nom_pat=?, prenom_pat=?, tel_pat=?, adresse_pat=?, docteur_id=?, med_patient_id=?, pat_facture_id=? WHERE patient_id=?";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+		        String patientId = patient_id.getText();
+
+		        if (patient_id.getText().isEmpty() ||
+		            patient_nom.getText().isEmpty() ||
+		            patient_prenom.getText().isEmpty() ||
+		            patient_tel.getText().isEmpty() ||
+		            patient_adresse.getText().isEmpty() ||
+		            patient_docteur_comboBox.getSelectionModel().getSelectedItem() == null ||
+		            patient_med_date_achat_comboBox.getSelectionModel().getSelectedItem() == null ||
+		            patient_fact_date_trans_comboBox.getSelectionModel().getSelectedItem() == null) {
+
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez remplir tous les champs !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Vous êtes sûr de vouloir mettre à jour cet élément avec cet ID ? : " + patientId + " ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                pst.setString(1, patient_nom.getText());
+		                pst.setString(2, patient_prenom.getText());
+		                pst.setString(3, patient_tel.getText());
+		                pst.setString(4, patient_adresse.getText());
+
+		                Docteur selectedItem = patient_docteur_comboBox.getSelectionModel().getSelectedItem();
+		                if (selectedItem != null) {
+		                    String docteurId = selectedItem.getDocteurId();
+		                    pst.setString(5, docteurId);
+		                }
+
+		                MedPatient medPatient = patient_med_date_achat_comboBox.getSelectionModel().getSelectedItem();
+		                if (medPatient != null) {
+		                    String medPatientId = medPatient.getMedPatientId();
+		                    pst.setString(6, medPatientId);
+		                }
+
+		                PatFacture patFacture = patient_fact_date_trans_comboBox.getSelectionModel().getSelectedItem();
+		                if (patFacture != null) {
+		                    String patFactureId = patFacture.getPatFactureId();
+		                    pst.setString(7, patFactureId);
+		                }
+
+		                pst.setString(8, patientId);
+
+		                int rowsUpdated = pst.executeUpdate();
+		                if (rowsUpdated > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Mise à jour réussie ✔ !");
+		                    alert.showAndWait();
+		                    showListPatient();
+		                    resetPatient();
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun élément trouvé avec cet ID.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la mise à jour de l'élément : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+
+	 public void deletePatient() {
+		    String sql = "DELETE FROM patient WHERE patient_id=?";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+		        String patientId = patient_id.getText();
+
+		        if (patient_id.getText().isEmpty()) {
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez cliquer sur l'élément que vous voulez supprimer !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Vous êtes sûr de vouloir supprimer cet élément avec cet ID ? : " + patientId + " ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                pst.setString(1, patientId);
+
+		                int rowsDeleted = pst.executeUpdate();
+		                if (rowsDeleted > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Suppression réussie ✔ !");
+		                    alert.showAndWait();
+		                    showListPatient();
+		                    resetPatient();
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun élément trouvé avec cet ID.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la suppression de l'élément : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+	 /* Facture */
+	 public ObservableList<Facture> showFacture() {
+		    ObservableList<Facture> listData = FXCollections.observableArrayList();
+		    String sql = "SELECT p.patient_id, p.nom_pat, p.prenom_pat, p.med_patient_id, " +
+		                 "SUM(t.qte_med_patient) AS total_quantity, SUM(m.prix * t.qte_med_patient) AS total_price, " +
+		                 "MIN(f.facture_id) AS facture_id, MIN(f.pat_facture_id) AS pat_facture_id, MIN(e.date_transaction) AS date_transaction, " +
+		                 "GROUP_CONCAT(DISTINCT m.nom_med ORDER BY m.nom_med ASC SEPARATOR ', ') AS nom_med " +
+		                 "FROM facture f " +
+		                 "JOIN gestion_pat_facture e ON f.pat_facture_id = e.pat_facture_id " +
+		                 "JOIN patient p ON e.pat_facture_id = p.pat_facture_id " +
+		                 "JOIN gestion_med_patient t ON p.med_patient_id = t.med_patient_id " +
+		                 "JOIN medicament m ON t.med_patient_id = m.med_patient_id " +
+		                 "GROUP BY p.patient_id, p.nom_pat, p.prenom_pat, p.med_patient_id";
+		    try {
+		        conn = DatabaseConnection.getConnection();
+		        pst = conn.prepareStatement(sql);
+		        rs = pst.executeQuery();
+
+		        while (rs.next()) {
+		            Facture facture = new Facture();
+		            facture.setFactureId(rs.getString("facture_id"));
+		            facture.setPatFactureId(rs.getString("pat_facture_id"));
+
+		            PatFacture patFacture = new PatFacture();
+		            patFacture.setPatFactureId(rs.getString("pat_facture_id"));
+		            patFacture.setDateTransaction(rs.getDate("date_transaction"));
+		            facture.setPatFacture(patFacture);
+
+		            Patient patient = new Patient();
+		            patient.setPatientId(rs.getString("patient_id"));
+		            patient.setNomPat(rs.getString("nom_pat"));
+		            patient.setPrenomPat(rs.getString("prenom_pat"));
+		            patient.setPatFactureId(rs.getString("pat_facture_id"));
+		            patient.setMedPatientId(rs.getString("med_patient_id"));
+		            facture.setPatient(patient);
+
+		            MedPatient medPatient = new MedPatient();
+		            medPatient.setMedPatientId(rs.getString("med_patient_id"));
+	           
+		            facture.setMedPatient(medPatient);
+		          
+		            Medicament medicament = new Medicament();
+		            medicament.setNomMed(rs.getString("nom_med"));
+		            facture.setMedicament(medicament);
+
+		            double totalPatient = rs.getDouble("total_price");
+		            facture.setTotal(totalPatient);
+
+		            
+		            facture.setQteMedPatient(rs.getInt("total_quantity"));
+
+		            listData.add(facture);
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return listData;
+		}
+
+	 private ObservableList<Facture> listFacture;
+	 public void showListFacture() {
+		    listFacture = showFacture();
+		    facture_id_col.setCellValueFactory(new PropertyValueFactory<>("factureId"));
+		    facture_date_trans_col.setCellValueFactory(new PropertyValueFactory<>("dateTransaction"));
+		    facture_total_col.setCellValueFactory(new PropertyValueFactory<>("total"));
+		    facture_med_col.setCellValueFactory(new PropertyValueFactory<>("nomMed"));
+		    facture_pat_col.setCellValueFactory(cellData -> {
+		        Facture facture = cellData.getValue();
+		        String fullName = facture.getPatient().getNomPat() + " " + facture.getPatient().getPrenomPat();
+		        return new SimpleStringProperty(fullName);
+		    });
+		    facture_qte_col.setCellValueFactory(new PropertyValueFactory<>("qteMedPatient"));
+		    facture_table.setItems(listFacture);
+		}
+	 public void selectFacture() {
+		 Facture facture=facture_table.getSelectionModel().getSelectedItem();
+		 int num=facture_table.getSelectionModel().getSelectedIndex();
+		 if(num-1<-1) {
+			 return;
+		 }
+		 facture_id.setText(facture.getFactureId());
+	 }
+	 
+	 public void resetFacture() {
+		 facture_id.setText("");
+		 date_trans_id_comboBox.getSelectionModel().clearSelection();
+	 }
+	 
+	 @FXML
+	 void selectDateTransactionFacture() {
+		 date_trans_id_comboBox.getSelectionModel().getSelectedItem();
+	 }
+
+	 public void insertFacture() {
+		 String sql=" INSERT INTO facture (facture_id,pat_facture_id) VALUES(?,?) ";
+		 try {
+			 Alert alert;
+			 if(facture_id.getText().isEmpty()
+					 || date_trans_id_comboBox.getSelectionModel().getSelectedItem()==null) {
+				 alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("s'il vous plait remplir tous les champs !");
+		            alert.showAndWait();
+			 }else {
+				 conn=DatabaseConnection.getConnection();
+				 String check=" SELECT * FROM facture WHERE facture_id=? ";
+				 pst=conn.prepareStatement(check);
+				 pst.setString(1,facture_id.getText());
+				 rs=pst.executeQuery();
+				 if (rs.next()) {
+		                alert = new Alert(Alert.AlertType.ERROR);
+		                alert.setTitle("Message d'erreur !!");
+		                alert.setHeaderText(null);
+		                alert.setContentText("Facture ID : " + facture_id.getText() + " déja exist dans la base de données !!");
+		                alert.showAndWait();
+		            }else {
+		            	pst=conn.prepareStatement(sql);
+		            	pst.setString(1, facture_id.getText());
+		            	PatFacture selectedItem=date_trans_id_comboBox.getSelectionModel().getSelectedItem();
+		            	if(selectedItem !=null) {
+		            		String patFactureId=selectedItem.getPatFactureId();
+		            		pst.setString(2, patFactureId);
+		            	}
+		            	 	pst.executeUpdate();
+
+			                alert = new Alert(Alert.AlertType.INFORMATION);
+			                alert.setTitle("Message d'information !");
+			                alert.setHeaderText(null);
+			                alert.setContentText("Facture Ajouté avec succés !✔");
+			                alert.showAndWait();
+			                showListFacture();
+			                resetFacture();
+		            }
+			 }
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 public void updateFacture() {
+		    String sql = "UPDATE facture SET pat_facture_id=? WHERE facture_id=?";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+		        String factureId = facture_id.getText();
+
+		        if (facture_id.getText().isEmpty() || date_trans_id_comboBox.getSelectionModel().getSelectedItem() == null) {
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez remplir tous les champs !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Vous êtes sûr de vouloir mettre à jour cet élément avec cet ID ? : " + factureId + " ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                PatFacture selectedItem = date_trans_id_comboBox.getSelectionModel().getSelectedItem();
+		                if (selectedItem != null) {
+		                    String patFactureId = selectedItem.getPatFactureId();
+		                    pst.setString(1, patFactureId);
+		                }
+		                pst.setString(2, factureId);
+
+		                int rowsUpdated = pst.executeUpdate();
+		                if (rowsUpdated > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Mise à jour réussie ✔ !");
+		                    alert.showAndWait();
+		                    showListFacture();
+		                    resetFacture();
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun élément trouvé avec cet ID.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		       Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la mise à jour de l'élément : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+	 public void deleteFacture() {
+		    String sql = "DELETE FROM facture WHERE facture_id=?";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+		        String factureId = facture_id.getText();
+
+		        if (facture_id.getText().isEmpty() 
+		        		|| date_trans_id_comboBox.getSelectionModel().getSelectedItem()==null) {
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez cliquer sur l'élément que vous voulez supprimer ! et remplir la date de transaction !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Vous êtes sûr de vouloir supprimer cet élément avec cet ID ? : " + factureId + " ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                pst.setString(1, factureId);
+
+		                int rowsDeleted = pst.executeUpdate();
+		                if (rowsDeleted > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Suppression réussie ✔ !");
+		                    alert.showAndWait();
+		                    showListFacture();
+		                    resetFacture();
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun élément trouvé avec cet ID.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		       Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la suppression de l'élément : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+
+
+	 /********************************************************/
 	    private double x=0;
 	    private double y=0;
 	    public void logout() {
@@ -2139,7 +2935,102 @@ public ObservableList<Medicament> listDataMedicament() {
 	    	stage.setIconified(true);
 	    }
 	    
+	    public void getDocteurItems(ComboBox<Docteur> comboBox) {
+	    	comboBox.setCellFactory(new Callback<ListView<Docteur>,ListCell<Docteur>>(){
+	    		@Override
+	    		public ListCell<Docteur> call(ListView<Docteur> param){
+	    			return new ListCell<Docteur>() {
+	    				@Override
+	    				protected void updateItem(Docteur item,boolean empty) {
+	    					super.updateItem(item, empty);
+	    					if(empty || item==null) {
+	    						setText(null);
+	    					}else {
+	    						setText(item.getNomDoc()+" "+item.getPrenomDoc());
+	    					}
+	    				}
+	    			};
+	    		}
+ 	    	});
+	    	
+	    	comboBox.setButtonCell(new ListCell<Docteur>() {
+	    		@Override
+				protected void updateItem(Docteur item,boolean empty) {
+					super.updateItem(item, empty);
+					if(empty || item==null) {
+						setText(null);
+					}else {
+						setText(item.getNomDoc()+" "+item.getPrenomDoc());
+					}
+				}
+	    	});
+	    }
+	    
+	    public void getPatFactureItems(ComboBox<PatFacture> comboBox) {
+	    	comboBox.setCellFactory(new Callback<ListView<PatFacture>,ListCell<PatFacture>>(){
+	    		@Override
+	    		public ListCell<PatFacture> call(ListView<PatFacture> param){
+	    			return new ListCell<PatFacture>() {
+	    				@Override
+	    				protected void updateItem(PatFacture item,boolean empty) {
+	    					super.updateItem(item, empty);
+	    					if(empty || item==null) {
+	    						setText(null);
+	    					}else {
+	    						setText(String.valueOf(item.getDateTransaction()));
+	    					}
+	    				}
+	    			};
+	    		}
+	    	});
+	    	
+	    	comboBox.setButtonCell(new ListCell<PatFacture>() {
+	    		@Override
+				protected void updateItem(PatFacture item,boolean empty) {
+					super.updateItem(item, empty);
+					if(empty || item==null) {
+						setText(null);
+					}else {
+						setText(String.valueOf(item.getDateTransaction()));
+					}
+				}
+	    	});
+	    	
+	    	
+	    }
+	    
 	    public void medPatientItemsMedicament(ComboBox<MedPatient> comboBox) {
+	    	comboBox.setCellFactory(new Callback<ListView<MedPatient>, ListCell<MedPatient>>() {
+		        @Override
+		        public ListCell<MedPatient> call(ListView<MedPatient> param) {
+		            return new ListCell<MedPatient>() {
+		                @Override
+		                protected void updateItem(MedPatient item, boolean empty) {
+		                    super.updateItem(item, empty);
+		                    if (empty || item == null) {
+		                        setText(null);
+		                    } else {
+		                        setText(String.valueOf(item.getQteMedPatient()));
+		                    }
+		                }
+		            };
+		        }
+		    });
+	    	
+	    	comboBox.setButtonCell(new ListCell<MedPatient>() {
+		        @Override
+		        protected void updateItem(MedPatient item, boolean empty) {
+		            super.updateItem(item, empty);
+		            if (empty || item == null) {
+		                setText(null);
+		            } else {
+		                setText(String.valueOf(item.getQteMedPatient()));
+		            }
+		        }
+		    });
+	    }
+	    
+	    public void medPatientItems(ComboBox<MedPatient> comboBox) {
 	    	comboBox.setCellFactory(new Callback<ListView<MedPatient>, ListCell<MedPatient>>() {
 		        @Override
 		        public ListCell<MedPatient> call(ListView<MedPatient> param) {
@@ -2169,6 +3060,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		        }
 		    });
 	    }
+	    
 	    
 	    public void stockIdMedItems(ComboBox<StockMed> comboBox) {
 	    	comboBox.setCellFactory(new Callback<ListView<StockMed>, ListCell<StockMed>>() {
@@ -2209,17 +3101,33 @@ public ObservableList<Medicament> listDataMedicament() {
 		 showListDataMedPatient();
 		 showListFournisseur();
 		 showListPatFacture();
+		 showListDocteur();
+		 showListPatient();
+		 showListFacture();
 		 
+		 getDocteurItems();
+		 getPatFactureItems();
+		 getListSpecialite();
 		    getStockItems();
 		    getMedPatientItems();
+		    patient_docteur_comboBox.setItems(ItemsDocteur);
+		    patient_med_date_achat_comboBox.setItems(medPatientItems);
+		    patient_fact_date_trans_comboBox.setItems(patFactureItems);
+		    
 		    date_achat_med_pat_comboBox.setItems(medPatientItems);
 		    stock_id_med_comboBox.setItems(stockItems);
 		    fournisseur_stock_id.setItems(stockItems);
+		    
+		    date_trans_id_comboBox.setItems(patFactureItems);
+		    getPatFactureItems(date_trans_id_comboBox);
+		    
 		    stockIdMedItems(stock_id_med_comboBox);
 		    medPatientItemsMedicament(date_achat_med_pat_comboBox);
 		    stockIdMedItems(fournisseur_stock_id);
 
-		  
+		    medPatientItems(patient_med_date_achat_comboBox);
+		  getPatFactureItems(patient_fact_date_trans_comboBox);
+		  getDocteurItems(patient_docteur_comboBox);
 		   
 		}
 

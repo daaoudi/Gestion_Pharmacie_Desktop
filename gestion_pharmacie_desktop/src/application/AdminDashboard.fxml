@@ -385,12 +385,12 @@
                                                          </font>
                                                       </Label>
                                                       <ComboBox fx:id="stock_id_med_comboBox" layoutX="110.0" layoutY="433.0" onAction="#selectStockItems" prefHeight="33.0" prefWidth="233.0" promptText="Choisir Qte Stock" />
-                                                      <Label layoutX="2.0" layoutY="485.0" text="Date d'Achat Patient :">
+                                                      <Label layoutX="2.0" layoutY="485.0" text="Qte Med par Patient :">
                                                          <font>
                                                             <Font name="Calibri" size="12.0" />
                                                          </font>
                                                       </Label>
-                                                      <ComboBox fx:id="date_achat_med_pat_comboBox" layoutX="110.0" layoutY="475.0" onAction="#selectMedPatientItems" prefHeight="33.0" prefWidth="233.0" promptText="Choisir Date Achat Patient" />
+                                                      <ComboBox fx:id="date_achat_med_pat_comboBox" layoutX="110.0" layoutY="475.0" onAction="#selectMedPatientItems" prefHeight="33.0" prefWidth="233.0" promptText="Choisir Qte Med par Patient" />
                                                       <Button fx:id="med_add_btn" layoutX="194.0" layoutY="515.0" mnemonicParsing="false" onAction="#insertMedicament" prefHeight="30.0" prefWidth="67.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fffdfd">
                                                          <font>
                                                             <Font name="Calisto MT" size="14.0" />
@@ -560,18 +560,18 @@
                                                       <Font name="Calisto MT" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="date_trans_id_comboBox" layoutX="124.0" layoutY="177.0" prefHeight="39.0" prefWidth="246.0" promptText="Choisir date de Transaction" />
-                                                <Button fx:id="facture_btn_add" layoutX="214.0" layoutY="253.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="63.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfcfc">
+                                                <ComboBox fx:id="date_trans_id_comboBox" layoutX="124.0" layoutY="177.0" onAction="#selectDateTransactionFacture" prefHeight="39.0" prefWidth="246.0" promptText="Choisir date de Transaction" />
+                                                <Button fx:id="facture_btn_add" layoutX="214.0" layoutY="253.0" mnemonicParsing="false" onAction="#insertFacture" prefHeight="34.0" prefWidth="63.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfcfc">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <Button fx:id="facture_btn_update" layoutX="134.0" layoutY="309.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="74.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#f5f2f2">
+                                                <Button fx:id="facture_btn_update" layoutX="134.0" layoutY="309.0" mnemonicParsing="false" onAction="#updateFacture" prefHeight="32.0" prefWidth="74.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#f5f2f2">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <Button fx:id="facture_btn_delete" layoutX="255.0" layoutY="310.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="81.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f5f3f3">
+                                                <Button fx:id="facture_btn_delete" layoutX="255.0" layoutY="310.0" mnemonicParsing="false" onAction="#deleteFacture" prefHeight="31.0" prefWidth="81.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f5f3f3">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
@@ -580,14 +580,14 @@
                                           </AnchorPane>
                                           <AnchorPane layoutX="444.0" layoutY="7.0" prefHeight="617.0" prefWidth="684.0" styleClass="board" stylesheets="@adminDashboard.css">
                                              <children>
-                                                <TableView fx:id="facture_table" layoutX="7.0" layoutY="7.0" prefHeight="604.0" prefWidth="668.0">
+                                                <TableView fx:id="facture_table" layoutX="7.0" layoutY="7.0" onMouseClicked="#selectFacture" prefHeight="604.0" prefWidth="668.0">
                                                   <columns>
-                                                    <TableColumn fx:id="facture_id_col" prefWidth="86.0" text="Facture ID" />
-                                                    <TableColumn fx:id="facture_date_trans_col" prefWidth="138.0" text="Date de Transaction" />
-                                                      <TableColumn fx:id="facture_total_col" prefWidth="118.0" text="Total" />
-                                                      <TableColumn fx:id="facture_med_col" prefWidth="120.0" text="Medicament" />
-                                                      <TableColumn fx:id="facture_pat_col" prefWidth="110.0" text="Patient" />
-                                                      <TableColumn fx:id="facture_qte_col" prefWidth="94.0" text="Quantite" />
+                                                    <TableColumn fx:id="facture_id_col" prefWidth="64.0" text="Facture ID" />
+                                                    <TableColumn fx:id="facture_date_trans_col" prefWidth="124.0" text="Date de Transaction" />
+                                                      <TableColumn fx:id="facture_total_col" prefWidth="103.0" text="Total" />
+                                                      <TableColumn fx:id="facture_med_col" prefWidth="219.0" text="Medicament" />
+                                                      <TableColumn fx:id="facture_pat_col" prefWidth="94.0" text="Patient" />
+                                                      <TableColumn fx:id="facture_qte_col" prefWidth="62.0" text="Sum Qte" />
                                                   </columns>
                                                 </TableView>
                                              </children>
@@ -596,7 +596,7 @@
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="docteur_form" prefHeight="630.0" prefWidth="1134.0">
+                              <AnchorPane fx:id="docteur_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
                                  <children>
                                     <AnchorPane layoutX="106.0" layoutY="78.0" prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
@@ -652,18 +652,18 @@
                                                       <Font name="Calisto MT Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="docteur_specialite_comboBox" layoutX="131.0" layoutY="315.0" prefHeight="35.0" prefWidth="231.0" promptText="Choisir spécialité" />
-                                                <Button fx:id="docteur_btn_add" layoutX="196.0" layoutY="391.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="66.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#f8f6f6">
+                                                <ComboBox fx:id="docteur_specialite_comboBox" layoutX="131.0" layoutY="315.0" onAction="#getListSpecialite" prefHeight="35.0" prefWidth="231.0" promptText="Choisir spécialité" />
+                                                <Button fx:id="docteur_btn_add" layoutX="196.0" layoutY="391.0" mnemonicParsing="false" onAction="#insertDocteur" prefHeight="31.0" prefWidth="66.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#f8f6f6">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <Button fx:id="docteur_btn_update" layoutX="133.0" layoutY="475.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="75.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fffafa">
+                                                <Button fx:id="docteur_btn_update" layoutX="133.0" layoutY="475.0" mnemonicParsing="false" onAction="#updateDocteur" prefHeight="31.0" prefWidth="75.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fffafa">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <Button fx:id="docteur_btn_delete" layoutX="242.0" layoutY="475.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="81.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="WHITE">
+                                                <Button fx:id="docteur_btn_delete" layoutX="242.0" layoutY="475.0" mnemonicParsing="false" onAction="#deleteDocteur" prefHeight="31.0" prefWidth="81.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="WHITE">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
@@ -672,7 +672,7 @@
                                           </AnchorPane>
                                           <AnchorPane layoutX="445.0" layoutY="11.0" prefHeight="610.0" prefWidth="681.0" styleClass="board" stylesheets="@adminDashboard.css">
                                              <children>
-                                                <TableView fx:id="docteur_table" layoutX="6.0" layoutY="7.0" prefHeight="591.0" prefWidth="668.0">
+                                                <TableView fx:id="docteur_table" layoutX="6.0" layoutY="7.0" onMouseClicked="#selectDocteur" prefHeight="591.0" prefWidth="668.0">
                                                   <columns>
                                                     <TableColumn fx:id="docteur_id_col" prefWidth="98.0" text="Docteur ID" />
                                                     <TableColumn fx:id="docteur_nom_col" prefWidth="116.0" text="Nom" />
@@ -727,30 +727,30 @@
                                                       <Font name="Calisto MT Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="patient_docteur_comboBox" layoutX="112.0" layoutY="329.0" prefHeight="35.0" prefWidth="253.0" promptText="Choisir docteur" />
+                                                <ComboBox fx:id="patient_docteur_comboBox" layoutX="112.0" layoutY="329.0" onAction="#selectDocteurComboBox" prefHeight="35.0" prefWidth="253.0" promptText="Choisir docteur" />
                                                 <Label layoutX="3.0" layoutY="382.0" text="Date d'Achat Med :">
                                                    <font>
                                                       <Font name="Calisto MT Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="patient_med_date_achat_comboBox" layoutX="112.0" layoutY="373.0" prefHeight="35.0" prefWidth="253.0" promptText="Date achat Médicament" />
+                                                <ComboBox fx:id="patient_med_date_achat_comboBox" layoutX="112.0" layoutY="373.0" onAction="#selectMedPatientComboBox" prefHeight="35.0" prefWidth="253.0" promptText="Date achat Médicament" />
                                                 <Label layoutX="3.0" layoutY="430.0" text="Date d'Trans Fact :">
                                                    <font>
                                                       <Font name="Calisto MT Bold" size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <ComboBox fx:id="patient_fact_date_trans_comboBox" layoutX="112.0" layoutY="421.0" prefHeight="35.0" prefWidth="253.0" promptText="Date de Transaction Facture" />
-                                                <Button fx:id="patient_btn_add" layoutX="204.0" layoutY="485.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfafa">
+                                                <ComboBox fx:id="patient_fact_date_trans_comboBox" layoutX="112.0" layoutY="421.0" onAction="#selectPatFactureComboBoc" prefHeight="35.0" prefWidth="253.0" promptText="Date de Transaction Facture" />
+                                                <Button fx:id="patient_btn_add" layoutX="204.0" layoutY="485.0" mnemonicParsing="false" onAction="#insertPatient" prefHeight="31.0" prefWidth="65.0" styleClass="btn-add" stylesheets="@adminDashboard.css" text="Ajouter" textFill="#fcfafa">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <Button fx:id="patient_btn_update" layoutX="133.0" layoutY="538.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="73.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fffdfd">
+                                                <Button fx:id="patient_btn_update" layoutX="133.0" layoutY="538.0" mnemonicParsing="false" onAction="#updatePatient" prefHeight="31.0" prefWidth="73.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fffdfd">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
                                                 </Button>
-                                                <Button fx:id="patient_btn_delete" layoutX="235.0" layoutY="538.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="83.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f5f5f5">
+                                                <Button fx:id="patient_btn_delete" layoutX="235.0" layoutY="538.0" mnemonicParsing="false" onAction="#deletePatient" prefHeight="31.0" prefWidth="83.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f5f5f5">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
@@ -765,7 +765,7 @@
                                           </AnchorPane>
                                           <AnchorPane layoutX="443.0" layoutY="7.0" prefHeight="616.0" prefWidth="686.0" styleClass="board" stylesheets="@adminDashboard.css">
                                              <children>
-                                                <TableView fx:id="patient_table" layoutX="6.0" layoutY="6.0" prefHeight="605.0" prefWidth="673.0" stylesheets="@adminDashboard.css">
+                                                <TableView fx:id="patient_table" layoutX="6.0" layoutY="6.0" onMouseClicked="#selectPatient" prefHeight="605.0" prefWidth="673.0" stylesheets="@adminDashboard.css">
                                                   <columns>
                                                     <TableColumn fx:id="patient_nom_col" prefWidth="65.0" text="Nom" />
                                                     <TableColumn fx:id="patient_prenom_col" prefWidth="73.0" text="Prenom" />
@@ -781,7 +781,7 @@
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="users_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                              <AnchorPane fx:id="users_form" prefHeight="630.0" prefWidth="1134.0">
                                  <children>
                                     <AnchorPane layoutX="108.0" layoutY="80.0" prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
