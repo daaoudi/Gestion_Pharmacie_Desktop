@@ -22,9 +22,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -166,7 +168,7 @@ public class AdminDashboardController implements Initializable {
 	    private TextField email_profile;
 
 	    @FXML
-	    private TableColumn<?, ?> email_user_col;
+	    private TableColumn<User, String> email_user_col;
 
 	    @FXML
 	    private Label email_user_label;
@@ -334,7 +336,7 @@ public class AdminDashboardController implements Initializable {
 	    private TextField nom_profile;
 
 	    @FXML
-	    private TableColumn<?, ?> nom_user_col;
+	    private TableColumn<User, String> nom_user_col;
 
 	    @FXML
 	    private Label nom_user_label;
@@ -343,7 +345,7 @@ public class AdminDashboardController implements Initializable {
 	    private PasswordField password_profile;
 
 	    @FXML
-	    private TableColumn<?, ?> password_user_col;
+	    private TableColumn<User, String> password_user_col;
 
 	    @FXML
 	    private Label password_user_label;
@@ -439,7 +441,7 @@ public class AdminDashboardController implements Initializable {
 	    private TextField prenom_profile;
 
 	    @FXML
-	    private TableColumn<?, ?> prenom_user_col;
+	    private TableColumn<User, String> prenom_user_col;
 
 	    @FXML
 	    private Label prenom_user_label;
@@ -511,13 +513,13 @@ public class AdminDashboardController implements Initializable {
 	    private TextField tel_profile;
 
 	    @FXML
-	    private TableColumn<?, ?> tel_user_col;
+	    private TableColumn<User, String> tel_user_col;
 
 	    @FXML
 	    private Label tel_user_label;
 
 	    @FXML
-	    private TableColumn<?, ?> type_user_col;
+	    private TableColumn<User, String> type_user_col;
 
 	    @FXML
 	    private Label type_user_label;
@@ -538,7 +540,7 @@ public class AdminDashboardController implements Initializable {
 	    private AnchorPane users_form;
 
 	    @FXML
-	    private TableView<?> users_table;
+	    private TableView<User> users_table;
 	    
 	    @FXML
 	    public void SwitchForm(ActionEvent event) {
@@ -804,6 +806,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		showListUsers();
 	    	}else if(event.getSource()==profile_btn) {
 	    		profile_form.setVisible(true);
 	    		home.setVisible(false);
@@ -827,6 +830,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		showProfile();
 	    	}
 	    }
 	/* Stock Medicament */
@@ -2888,7 +2892,290 @@ public ObservableList<Medicament> listDataMedicament() {
 		        alert.showAndWait();
 		    }
 		}
+	 	/*Users*/
+	 public ObservableList<User> showUsers() {
+		    ObservableList<User> listData = FXCollections.observableArrayList();
+		    String sql = "SELECT * FROM users WHERE user_type='manager' OR user_type='pharmacie'";
+		    try {
+		        conn = DatabaseConnection.getConnection();
+		        pst = conn.prepareStatement(sql);
+		        rs = pst.executeQuery();
+		        while (rs.next()) {
+		            User user = new User();
+		            user.setId(rs.getInt("id"));
+		            user.setNom(rs.getString("nom"));
+		            user.setPrenom(rs.getString("prenom"));
+		            user.setEmail(rs.getString("email"));
+		            user.setPassword(rs.getString("password"));
+		            user.setTelephone(rs.getString("telephone"));
+		            user.setUserType(rs.getString("user_type"));
+		            listData.add(user);
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		    return listData;
+		}
+	 private ObservableList<User> listUsers;
+	 public void showListUsers() {
+		    listUsers = showUsers();
+		    nom_user_col.setCellValueFactory(new PropertyValueFactory<>("nom"));
+		    prenom_user_col.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+		    email_user_col.setCellValueFactory(new PropertyValueFactory<>("email"));
+		    password_user_col.setCellValueFactory(new PropertyValueFactory<>("password"));
+		    tel_user_col.setCellValueFactory(new PropertyValueFactory<>("telephone"));
+		    type_user_col.setCellValueFactory(new PropertyValueFactory<>("userType"));
+		    users_table.setItems(listUsers);
+		}
+	 public void selectUser() {
+		 User user=users_table.getSelectionModel().getSelectedItem();
+		 int num = users_table.getSelectionModel().getSelectedIndex();
+		 if(num-1<-1) {
+			 return;
+		 }
+		 nom_user_label.setText(user.getNom());
+		 prenom_user_label.setText(user.getPrenom());
+		 email_user_label.setText(user.getEmail());
+		 password_user_label.setText(user.getPassword());
+		 tel_user_label.setText(user.getTelephone());
+		 type_user_label.setText(user.getUserType());
+	 }
+	 
+	 public void deleteUser() {
+		    String sql = "DELETE FROM users WHERE email=?";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+		        String email = email_user_label.getText();  
 
+		        if (email.isEmpty()) {
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez sélectionner l'utilisateur que vous souhaitez supprimer !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Êtes-vous sûr de vouloir supprimer cet utilisateur avec cet e-mail ? : " + email + " ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                pst.setString(1, email);
+
+		                int rowsDeleted = pst.executeUpdate();
+		                if (rowsDeleted > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Suppression réussie ✔ !");
+		                    alert.showAndWait();
+		                    showListUsers();
+		                   
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun utilisateur trouvé avec cet e-mail.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+	 /*Profile*/
+	 public void showProfile() {
+		    String sql = "SELECT * FROM users WHERE user_type='admin'";
+		    try {
+		        conn = DatabaseConnection.getConnection();
+		        pst = conn.prepareStatement(sql);
+		        rs = pst.executeQuery();
+		        if (rs.next()) {
+		            
+		            User user = new User();
+		            user.setId(rs.getInt("id"));
+		            user.setNom(rs.getString("nom"));
+		            user.setPrenom(rs.getString("prenom"));
+		            user.setEmail(rs.getString("email"));
+		            user.setPassword(rs.getString("password"));
+		            user.setTelephone(rs.getString("telephone"));
+		            user.setUserType(rs.getString("user_type"));
+
+		           
+		            nom_profile.setText(user.getNom());
+		            prenom_profile.setText(user.getPrenom());
+		            email_profile.setText(user.getEmail());
+		            password_profile.setText(user.getPassword());
+		            tel_profile.setText(user.getTelephone());
+		        } else {
+		           
+		            Alert alert = new Alert(Alert.AlertType.WARNING);
+		            alert.setTitle("Avertissement");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Aucun utilisateur admin trouvé.");
+		            alert.showAndWait();
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		        Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la récupération du profil utilisateur : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+
+	 public void updateProfile() {
+		    String sql = "UPDATE users SET nom=?, prenom=?, email=?, password=?, telephone=? WHERE user_type='admin'";
+		    try {
+		        Alert alert;
+		        conn = DatabaseConnection.getConnection();
+
+		        if (nom_profile.getText().isEmpty() ||
+		            prenom_profile.getText().isEmpty() ||
+		            email_profile.getText().isEmpty() ||
+		            password_profile.getText().isEmpty() ||
+		            tel_profile.getText().isEmpty()) {
+
+		            alert = new Alert(Alert.AlertType.ERROR);
+		            alert.setTitle("Message d'erreur !!");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Veuillez remplir tous les champs !");
+		            alert.showAndWait();
+		        } else {
+		            alert = new Alert(Alert.AlertType.CONFIRMATION);
+		            alert.setTitle("Message de Confirmation !");
+		            alert.setHeaderText(null);
+		            alert.setContentText("Êtes-vous sûr de vouloir mettre à jour votre profil ?");
+		            Optional<ButtonType> option = alert.showAndWait();
+		            if (option.isPresent() && option.get() == ButtonType.OK) {
+		                pst = conn.prepareStatement(sql);
+		                pst.setString(1, nom_profile.getText());
+		                pst.setString(2, prenom_profile.getText());
+		                pst.setString(3, email_profile.getText());
+		                pst.setString(4, password_profile.getText());
+		                pst.setString(5, tel_profile.getText());
+
+		                int rowsUpdated = pst.executeUpdate();
+		                if (rowsUpdated > 0) {
+		                    alert = new Alert(Alert.AlertType.INFORMATION);
+		                    alert.setTitle("Message d'information");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Mise à jour réussie ✔ !");
+		                    alert.showAndWait();
+		                    showProfile(); 
+		                } else {
+		                    alert = new Alert(Alert.AlertType.WARNING);
+		                    alert.setTitle("Avertissement");
+		                    alert.setHeaderText(null);
+		                    alert.setContentText("Aucun utilisateur admin trouvé.");
+		                    alert.showAndWait();
+		                }
+		            }
+		        }
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		       Alert alert = new Alert(Alert.AlertType.ERROR);
+		        alert.setTitle("Erreur SQL");
+		        alert.setHeaderText(null);
+		        alert.setContentText("Erreur lors de la mise à jour du profil utilisateur : " + e.getMessage());
+		        alert.showAndWait();
+		    }
+		}
+
+	
+	 /*Home*/
+	 public void getQteStock() {
+		 String sql="SELECT COUNT(stock_id) FROM stock_med";
+		 int qteStock=0;
+		 try {
+			
+			 conn=DatabaseConnection.getConnection();
+			 pst=conn.prepareStatement(sql);
+			 rs = pst.executeQuery();
+			 while(rs.next()) {
+				 qteStock=rs.getInt("COUNT(stock_id)");
+			 }
+			 stock_qte.setText(String.valueOf(qteStock));
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 public void getQtePatient() {
+		 String sql="SELECT COUNT(patient_id) FROM patient";
+		 int qtePatient=0;
+		 try {
+			 conn=DatabaseConnection.getConnection();
+			 pst=conn.prepareStatement(sql);
+			 rs=pst.executeQuery();
+			 while(rs.next()) {
+				 qtePatient=rs.getInt("COUNT(patient_id)");
+			 }
+			 patient_nbr.setText(String.valueOf(qtePatient));
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 public void getQteDocteur() {
+		 String sql="SELECT COUNT(docteur_id) FROM docteur";
+		 int qteDocteur=0;
+		 try {
+			 conn=DatabaseConnection.getConnection();
+			 pst=conn.prepareStatement(sql);
+			 rs=pst.executeQuery();
+			 while(rs.next()) {
+				 qteDocteur=rs.getInt("COUNT(docteur_id)");
+			 }
+			 docteur_nbr.setText(String.valueOf(qteDocteur));
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 
+	 public void getQteFournisseur() {
+		 String sql="SELECT COUNT(fournisseur_id) FROM fournisseur";
+		 int qteFournisseur=0;
+		 try {
+			 conn=DatabaseConnection.getConnection();
+			 pst=conn.prepareStatement(sql);
+			 rs=pst.executeQuery();
+			 while(rs.next()) {
+				 qteFournisseur=rs.getInt("COUNT(fournisseur_id)");
+			 }
+			 fournisseur_nbr.setText(String.valueOf(qteFournisseur));
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
+	 
+	 public void homeChartPatientDateTransaction() {
+		 patient_data_chart.getData().clear();
+		 String sql="SELECT date_transaction AS date,COUNT(patient_id) FROM patient p,gestion_pat_facture g,facture f WHERE "
+		 		+ "p.pat_facture_id=g.pat_facture_id AND g.pat_facture_id=f.pat_facture_id GROUP BY date  "
+		 		+ "ORDER BY TIMESTAMP(date) ASC LIMIT 3";
+		 try {
+	        	conn= DatabaseConnection.getConnection();
+	            XYChart.Series chart = new XYChart.Series();
+
+	            pst = conn.prepareStatement(sql);
+	            rs = pst.executeQuery();
+
+	            while (rs.next()) {
+	                chart.getData().add(new XYChart.Data(rs.getString(1), rs.getInt(2)));
+	            }
+	            patient_data_chart.getData().add(chart);
+		 }catch(Exception e) {
+			 e.printStackTrace();
+		 }
+	 }
 
 	 /********************************************************/
 	    private double x=0;
@@ -3104,10 +3391,18 @@ public ObservableList<Medicament> listDataMedicament() {
 		 showListDocteur();
 		 showListPatient();
 		 showListFacture();
+		 showListUsers();
+		 showProfile();
 		 
-		 getDocteurItems();
-		 getPatFactureItems();
-		 getListSpecialite();
+		 getQteStock();
+		 getQtePatient();
+		 getQteDocteur();
+		 getQteFournisseur();
+		 homeChartPatientDateTransaction();
+		 
+		 	getDocteurItems();
+		 	getPatFactureItems();
+		 	getListSpecialite();
 		    getStockItems();
 		    getMedPatientItems();
 		    patient_docteur_comboBox.setItems(ItemsDocteur);

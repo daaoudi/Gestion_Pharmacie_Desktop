@@ -208,7 +208,7 @@
                                                 </AnchorPane>
                                              </children>
                                           </AnchorPane>
-                                          <BarChart fx:id="patient_data_chart" layoutX="127.0" layoutY="313.0" prefHeight="297.0" prefWidth="856.0" title="Patient Donneé de Transaction ">
+                                          <BarChart fx:id="patient_data_chart" layoutX="127.0" layoutY="313.0" prefHeight="297.0" prefWidth="856.0" title="Nombre de Patient avec Donneé de date Transaction ">
                                             <xAxis>
                                               <CategoryAxis side="BOTTOM" />
                                             </xAxis>
@@ -781,7 +781,7 @@
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="users_form" prefHeight="630.0" prefWidth="1134.0">
+                              <AnchorPane fx:id="users_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
                                  <children>
                                     <AnchorPane layoutX="108.0" layoutY="80.0" prefHeight="630.0" prefWidth="1134.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
@@ -828,7 +828,7 @@
                                                 <Label fx:id="password_user_label" layoutX="97.0" layoutY="298.0" prefHeight="44.0" prefWidth="231.0" styleClass="label-field" stylesheets="@adminDashboard.css" />
                                                 <Label fx:id="tel_user_label" layoutX="97.0" layoutY="359.0" prefHeight="44.0" prefWidth="231.0" styleClass="label-field" stylesheets="@adminDashboard.css" />
                                                 <Label fx:id="type_user_label" layoutX="97.0" layoutY="420.0" prefHeight="44.0" prefWidth="231.0" styleClass="label-field" stylesheets="@adminDashboard.css" />
-                                                <Button fx:id="user_btn_delete" layoutX="166.0" layoutY="498.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="83.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="WHITE">
+                                                <Button fx:id="user_btn_delete" layoutX="166.0" layoutY="498.0" mnemonicParsing="false" onAction="#deleteUser" prefHeight="34.0" prefWidth="83.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="WHITE">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>
@@ -837,7 +837,7 @@
                                           </AnchorPane>
                                           <AnchorPane layoutX="406.0" layoutY="6.0" prefHeight="617.0" prefWidth="722.0" styleClass="board" stylesheets="@adminDashboard.css">
                                              <children>
-                                                <TableView fx:id="users_table" layoutX="6.0" layoutY="5.0" prefHeight="608.0" prefWidth="710.0">
+                                                <TableView fx:id="users_table" layoutX="6.0" layoutY="5.0" onMouseClicked="#selectUser" prefHeight="608.0" prefWidth="710.0">
                                                   <columns>
                                                     <TableColumn fx:id="nom_user_col" prefWidth="92.0" text="Nom" />
                                                     <TableColumn fx:id="prenom_user_col" prefWidth="102.0" text="Prenom" />
@@ -853,53 +853,48 @@
                                     </AnchorPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane fx:id="profile_form" prefHeight="630.0" prefWidth="1134.0" visible="false">
+                              <AnchorPane fx:id="profile_form" prefHeight="630.0" prefWidth="1134.0">
                                  <children>
                                     <AnchorPane layoutX="31.0" layoutY="25.0" prefHeight="630.0" prefWidth="1134.0" styleClass="board" stylesheets="@adminDashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
-                                          <AnchorPane layoutX="227.0" layoutY="26.0" prefHeight="584.0" prefWidth="661.0" styleClass="board" stylesheets="@adminDashboard.css">
+                                          <AnchorPane layoutX="340.0" layoutY="60.0" prefHeight="510.0" prefWidth="460.0" styleClass="board-profile" stylesheets="@adminDashboard.css">
                                              <children>
-                                                <Label layoutX="288.0" layoutY="43.0" text="Profile Admin">
+                                                <Label layoutX="181.0" layoutY="88.0" text="Profile Admin">
                                                    <font>
                                                       <Font name="Calisto MT" size="16.0" />
                                                    </font>
                                                 </Label>
-                                                <Label layoutX="162.0" layoutY="152.0" text="Nom :">
+                                                <Label layoutX="47.0" layoutY="153.0" text="Nom :">
                                                    <font>
                                                       <Font name="Calisto MT" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="nom_profile" layoutX="244.0" layoutY="140.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
-                                                <Label layoutX="162.0" layoutY="211.0" text="Prenom :">
+                                                <TextField fx:id="nom_profile" layoutX="129.0" layoutY="141.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="47.0" layoutY="212.0" text="Prenom :">
                                                    <font>
                                                       <Font name="Calisto MT" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="prenom_profile" layoutX="244.0" layoutY="199.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
-                                                <Label layoutX="162.0" layoutY="276.0" text="Email :">
+                                                <TextField fx:id="prenom_profile" layoutX="129.0" layoutY="200.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="47.0" layoutY="277.0" text="Email :">
                                                    <font>
                                                       <Font name="Calisto MT" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="email_profile" layoutX="244.0" layoutY="264.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
-                                                <Label layoutX="162.0" layoutY="344.0" text="Password :">
+                                                <TextField fx:id="email_profile" layoutX="129.0" layoutY="265.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Label layoutX="47.0" layoutY="345.0" text="Password :">
                                                    <font>
                                                       <Font name="Calisto MT" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <Label layoutX="162.0" layoutY="400.0" text="Telephone :">
+                                                <Label layoutX="47.0" layoutY="401.0" text="Telephone :">
                                                    <font>
                                                       <Font name="Calisto MT" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <TextField fx:id="tel_profile" layoutX="244.0" layoutY="388.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
-                                                <PasswordField fx:id="password_profile" layoutX="244.0" layoutY="329.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
-                                                <Button fx:id="profile_btn_update" layoutX="244.0" layoutY="462.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="77.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fcfafa">
-                                                   <font>
-                                                      <Font name="Calisto MT" size="14.0" />
-                                                   </font>
-                                                </Button>
-                                                <Button fx:id="profile_btn_delete" layoutX="352.0" layoutY="462.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" styleClass="btn-delete" stylesheets="@adminDashboard.css" text="Supprimer" textFill="#f8f1f1">
+                                                <TextField fx:id="tel_profile" layoutX="129.0" layoutY="389.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <PasswordField fx:id="password_profile" layoutX="129.0" layoutY="330.0" prefHeight="45.0" prefWidth="215.0" styleClass="textfield" stylesheets="@adminDashboard.css" />
+                                                <Button fx:id="profile_btn_update" layoutX="198.0" layoutY="459.0" mnemonicParsing="false" onAction="#updateProfile" prefHeight="31.0" prefWidth="77.0" styleClass="btn-update" stylesheets="@adminDashboard.css" text="Modifier" textFill="#fcfafa">
                                                    <font>
                                                       <Font name="Calisto MT" size="14.0" />
                                                    </font>

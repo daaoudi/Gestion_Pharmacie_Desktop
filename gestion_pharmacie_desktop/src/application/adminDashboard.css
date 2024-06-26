@@ -123,7 +123,12 @@
 	
 }
 .board{
-	-fx-background-color: #fff;
+	-fx-background-color: #d7dbd8;
+	-fx-border-radius: 5px;
+	
+}
+.board-profile{
+	-fx-background-color: linear-gradient(to top left , #419e58,#8d918e);
 	-fx-border-radius: 5px;
 	-fx-effect: dropshadow(three-pass-box,rgba(0,0,0,0.5),6,0,0,0); 
 }
