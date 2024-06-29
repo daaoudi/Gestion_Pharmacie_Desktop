@@ -49,8 +49,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleObjectProperty;
-
-public class AdminDashboardController implements Initializable {
+public class SuperadminController  implements Initializable {
 	private Connection conn;
 	private PreparedStatement pst;
 	private Statement statement;
@@ -688,9 +687,8 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		gestion_med_pat_form.setVisible(false);
 	    		med_form.setVisible(false);
 	    		fournisseur_form.setVisible(false);
-	    		
 	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca ); ");
-	    		users_btn.setStyle(" -fx-background-color:TRANSPARENT");
+users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		
 	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -2896,7 +2894,7 @@ public ObservableList<Medicament> listDataMedicament() {
 	 	/*Users*/
 	 public ObservableList<User> showUsers() {
 		    ObservableList<User> listData = FXCollections.observableArrayList();
-		    String sql = "SELECT * FROM users WHERE user_type='manager' OR user_type='pharmacie'";
+		    String sql = "SELECT * FROM users WHERE user_type='manager' OR user_type='pharmacie'OR user_type='admin'";
 		    try {
 		        conn = DatabaseConnection.getConnection();
 		        pst = conn.prepareStatement(sql);
@@ -2994,7 +2992,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		}
 	 /*Profile*/
 	 public void showProfile() {
-		    String sql = "SELECT * FROM users WHERE user_type='admin'";
+		    String sql = "SELECT * FROM users WHERE user_type='super_admin'";
 		    try {
 		        conn = DatabaseConnection.getConnection();
 		        pst = conn.prepareStatement(sql);
@@ -3021,7 +3019,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		            Alert alert = new Alert(Alert.AlertType.WARNING);
 		            alert.setTitle("Avertissement");
 		            alert.setHeaderText(null);
-		            alert.setContentText("Aucun utilisateur admin trouvé.");
+		            alert.setContentText("Aucun utilisateur super_admin trouvé.");
 		            alert.showAndWait();
 		        }
 		    } catch (Exception e) {
@@ -3035,7 +3033,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		}
 
 	 public void updateProfile() {
-		    String sql = "UPDATE users SET nom=?, prenom=?, email=?, password=?, telephone=? WHERE user_type='admin'";
+		    String sql = "UPDATE users SET nom=?, prenom=?, email=?, password=?, telephone=? WHERE user_type='super_admin'";
 		    try {
 		        Alert alert;
 		        conn = DatabaseConnection.getConnection();
@@ -3077,7 +3075,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		                    alert = new Alert(Alert.AlertType.WARNING);
 		                    alert.setTitle("Avertissement");
 		                    alert.setHeaderText(null);
-		                    alert.setContentText("Aucun utilisateur admin trouvé.");
+		                    alert.setContentText("Aucun utilisateur super_admin trouvé.");
 		                    alert.showAndWait();
 		                }
 		            }
@@ -3431,5 +3429,5 @@ public ObservableList<Medicament> listDataMedicament() {
 		  getDocteurItems(patient_docteur_comboBox);
 		   
 		}
-
 }
+

@@ -50,7 +50,7 @@ import javafx.util.Callback;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-public class AdminDashboardController implements Initializable {
+public class pharmacieController implements Initializable {
 	private Connection conn;
 	private PreparedStatement pst;
 	private Statement statement;
@@ -557,7 +557,7 @@ public class AdminDashboardController implements Initializable {
 	    		users_form.setVisible(false);
 	    		profile_form.setVisible(false);
 	    		home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c);");
-users_btn.setStyle(" -fx-background-color:TRANSPARENT");
+
 	    		
 	    	
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -583,9 +583,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		profile_form.setVisible(false);
 	    		home.setVisible(false);
 	    		stock_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca );");
-users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+
 	    		
 	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -610,9 +608,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		home.setVisible(false);
 	    		stock_medicament_form.setVisible(false);
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca ); ");
-users_btn.setStyle(" -fx-background-color:TRANSPARENT");
-	    		
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -635,9 +631,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		stock_medicament_form.setVisible(false);
 	    		gestion_med_pat_form.setVisible(false);
 	    		medicament_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca ); ");
-users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -662,9 +656,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_form.setVisible(false);
 	    		med_form.setVisible(false);
 	    		fournisseur_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca );");
-users_btn.setStyle(" -fx-background-color:TRANSPARENT");
-	    		
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -688,11 +680,8 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		gestion_med_pat_form.setVisible(false);
 	    		med_form.setVisible(false);
 	    		fournisseur_form.setVisible(false);
-	    		
 	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca ); ");
-	    		users_btn.setStyle(" -fx-background-color:TRANSPARENT");
-	    		
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -716,9 +705,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		fournisseur_form.setVisible(false);
 	    		gestion_pat_facture_form.setVisible(false);
 	    		facture_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca );");
-users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -741,10 +728,8 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		fournisseur_form.setVisible(false);
 	    		gestion_pat_facture_form.setVisible(false);
 	    		facture_form.setVisible(false);
-	    		docteur_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca ); ");
-users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		docteur_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right ,#e9f1ea, #c9ccca ); ");
+
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -769,9 +754,7 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		facture_form.setVisible(false);
 	    		docteur_form.setVisible(false);
 	    		patient_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca ); ");
-	    		users_btn.setStyle(" -fx-background-color:TRANSPARENT");
 	    		
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		
@@ -783,31 +766,6 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		showListPatient();
 	    		
-	    	}else if (event.getSource()==users_btn) {
-	    		users_form.setVisible(true);
-	    		profile_form.setVisible(false);
-	    		home.setVisible(false);
-	    		stock_medicament_form.setVisible(false);
-	    		gestion_med_pat_form.setVisible(false);
-	    		med_form.setVisible(false);
-	    		fournisseur_form.setVisible(false);
-	    		gestion_pat_facture_form.setVisible(false);
-	    		facture_form.setVisible(false);
-	    		docteur_form.setVisible(false);
-	    		patient_form.setVisible(false);
-	    		users_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca ); ");
-	    		
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		profile_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		gestion_pat_fact_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		fournisseur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		medicament_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		gestion_med_pat_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		showListUsers();
 	    	}else if(event.getSource()==profile_btn) {
 	    		profile_form.setVisible(true);
 	    		home.setVisible(false);
@@ -821,9 +779,9 @@ users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		patient_form.setVisible(false);
 	    		users_form.setVisible(true);
 	    		profile_btn.setStyle(" -fx-background-color:linear-gradient(to bottom right , #e9f1ea, #c9ccca ); ");
-	    		home_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    		
 	    		stock_btn.setStyle(" -fx-background-color:TRANSPARENT ");
-	    		users_btn.setStyle(" -fx-background-color:TRANSPARENT ");
+	    	
 	    		patient_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		docteur_btn.setStyle(" -fx-background-color:TRANSPARENT ");
 	    		facture_btn.setStyle(" -fx-background-color:TRANSPARENT ");
@@ -2994,7 +2952,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		}
 	 /*Profile*/
 	 public void showProfile() {
-		    String sql = "SELECT * FROM users WHERE user_type='admin'";
+		    String sql = "SELECT * FROM users WHERE user_type='pharmacie'";
 		    try {
 		        conn = DatabaseConnection.getConnection();
 		        pst = conn.prepareStatement(sql);
@@ -3021,7 +2979,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		            Alert alert = new Alert(Alert.AlertType.WARNING);
 		            alert.setTitle("Avertissement");
 		            alert.setHeaderText(null);
-		            alert.setContentText("Aucun utilisateur admin trouvé.");
+		            alert.setContentText("Aucun utilisateur pharmacie trouvé.");
 		            alert.showAndWait();
 		        }
 		    } catch (Exception e) {
@@ -3035,7 +2993,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		}
 
 	 public void updateProfile() {
-		    String sql = "UPDATE users SET nom=?, prenom=?, email=?, password=?, telephone=? WHERE user_type='admin'";
+		    String sql = "UPDATE users SET nom=?, prenom=?, email=?, password=?, telephone=? WHERE user_type='pharmacie'";
 		    try {
 		        Alert alert;
 		        conn = DatabaseConnection.getConnection();
@@ -3077,7 +3035,7 @@ public ObservableList<Medicament> listDataMedicament() {
 		                    alert = new Alert(Alert.AlertType.WARNING);
 		                    alert.setTitle("Avertissement");
 		                    alert.setHeaderText(null);
-		                    alert.setContentText("Aucun utilisateur admin trouvé.");
+		                    alert.setContentText("Aucun utilisateur pharmacie trouvé.");
 		                    alert.showAndWait();
 		                }
 		            }
@@ -3177,11 +3135,10 @@ public ObservableList<Medicament> listDataMedicament() {
 			 e.printStackTrace();
 		 }
 	 }
-	 
+
 	 public void defaultNav() {
 		 home_btn.setStyle("-fx-background-color:linear-gradient(to bottom right , #de7e23,#dfe62c);");
 	 }
-
 	 /********************************************************/
 	    private double x=0;
 	    private double y=0;

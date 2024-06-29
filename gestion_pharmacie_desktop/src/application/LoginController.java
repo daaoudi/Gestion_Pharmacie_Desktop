@@ -60,8 +60,15 @@ public class LoginController  {
             String fxmlFile;
             if ("admin".equals(userType)) {
                 fxmlFile = "AdminDashboard.fxml";
-            } else {
-                // You can add other user types and their respective FXML files here
+            } else if ("pharmacie".equals(userType)) {
+                fxmlFile = "pharmacie.fxml";
+            }else if ("manager".equals(userType)) {
+                fxmlFile = "manager.fxml";
+            }else if ("super_admin".equals(userType)) {
+                fxmlFile = "super_admin.fxml";
+            }
+            else {
+               
                 fxmlFile = "login.fxml"; 
             }
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -70,10 +77,10 @@ public class LoginController  {
        
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(dashboard));
-            // Get the screen dimensions
+     
             Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
             
-            // Calculate the center position of the screen
+           
             stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
             stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
             stage.show();
@@ -88,7 +95,7 @@ public class LoginController  {
         String username = nom.getText();
         String userPassword = password.getText();
 
-        // Query to check if the entered credentials exist in the database
+     
         String query = "SELECT * FROM users WHERE email = ? AND password = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
@@ -101,14 +108,14 @@ public class LoginController  {
             alert.setContentText(" Connexion réussie ! ✔ ");
             alert.showAndWait();
             if (resultSet.next()) {
-                // User authenticated
+              
                 String userType = resultSet.getString("user_type");
-                System.out.println("Login successful. User Type: " + userType);
+               // System.out.println("Login successful. User Type: " + userType);
 
-                // Redirect based on user type
+                
                 redirectToDashboard(userType,event);
             } else {
-                // Invalid credentials
+                
                 System.out.println("Login failed. Invalid username or password.");
                 showAlert("Login Failed", "Invalid username or password.");
             }
@@ -135,15 +142,15 @@ public class LoginController  {
 	    }
 
 		public void SigninButtonAction(ActionEvent event) {
-			  // If login is successful, close the current stage and relaunch the application
+			
 	        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 	        currentStage.close();
 
-	        // Relaunch the application
+	       
 	        Main main = new Main();
 	        main.start(new Stage());
 		}
 
 
-    // Other methods and logic as needed
+  
 }
